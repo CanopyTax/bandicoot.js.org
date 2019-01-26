@@ -4,9 +4,12 @@
   "author": "Joel Denning <joeldenning@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "gitbook build"
+    "build": "rimraf _book && gitbook build && copyfiles CNAME _book",
+    "watch": "gitbook serve"
   },
   "dependencies": {
-    "gitbook-cli": "^2.3.2"
+    "copyfiles": "^2.1.0",
+    "gitbook-cli": "^2.3.2",
+    "rimraf": "^2.6.3"
   }
 }
