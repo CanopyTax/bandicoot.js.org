@@ -423,6 +423,19 @@
             
         </li>
     
+        <li class="chapter " data-level="6.7" data-path="pasting.html">
+            
+                <a href="pasting.html">
+            
+                    
+                    Pasting
+            
+                </a>
+            
+
+            
+        </li>
+    
 
     
 
@@ -473,6 +486,29 @@
 <p>I wish they would have called it &quot;impossible-to-understand-cursor-information.&quot;</p>
 <p>&#x2014; Anonymous</p>
 </blockquote>
+<h2 id="definition">Definition</h2>
+<p>Selection is the DOM concept for keeping track of the cursor position and highlighted text.</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Selection" target="_blank">Read more on MDN</a></p>
+<p>Selection is notoriously tricky to understand and can be quite painful to work with. Reading from and
+manipulating the DOM&apos;s selection is required for rich text editing.</p>
+<h2 id="what-this-means-for-you">What this means for you</h2>
+<p>Bandicoot hides much or all of the tricky selection stuff from you. For most cases, you won&apos;t have to deal with
+it at all.</p>
+<p>If you do need to deal with the DOM&apos;s selection yourself, bandicoot does not provide any abstraction on top
+of what the DOM already has.</p>
+<h2 id="example">Example</h2>
+<p>Here&apos;s a very basic example of using DOM selection:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> selection = <span class="hljs-built_in">window</span>.getSelection()
+<span class="hljs-keyword">if</span> (selection.rangeCount &gt; <span class="hljs-number">0</span>) {
+  <span class="hljs-keyword">const</span> range = selection.getRangeAt(<span class="hljs-number">0</span>)
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;the currently selected text is&apos;</span>, range.toString())
+}
+</code></pre>
+<h2 id="what-about-range">What about &quot;range&quot;?</h2>
+<p>When learning about selection, you&apos;ll quickly discover that what you really need is a
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Range" target="_blank">Range</a> object instead of a
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Selection" target="_blank">Selection</a> object.</p>
+<p>Check out our <a href="range.html">documentation for Range</a> for more information.</p>
 
                                 
                                 </section>
@@ -516,7 +552,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Selection","level":"6.4","depth":1,"next":{"title":"Range","level":"6.5","depth":1,"path":"concepts/range.md","ref":"concepts/range.md","articles":[]},"previous":{"title":"Content Editable","level":"6.3","depth":1,"path":"concepts/content-editable.md","ref":"concepts/content-editable.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"concepts/selection.md","mtime":"2019-01-26T20:41:50.864Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-26T20:42:37.082Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Selection","level":"6.4","depth":1,"next":{"title":"Range","level":"6.5","depth":1,"path":"concepts/range.md","ref":"concepts/range.md","articles":[]},"previous":{"title":"Content Editable","level":"6.3","depth":1,"path":"concepts/content-editable.md","ref":"concepts/content-editable.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"concepts/selection.md","mtime":"2019-01-26T22:07:31.111Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-26T22:08:17.145Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

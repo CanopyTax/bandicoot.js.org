@@ -423,6 +423,19 @@
             
         </li>
     
+        <li class="chapter " data-level="6.7" data-path="pasting.html">
+            
+                <a href="pasting.html">
+            
+                    
+                    Pasting
+            
+                </a>
+            
+
+            
+        </li>
+    
 
     
 
@@ -474,6 +487,29 @@
 So when there is, you better press it.</p>
 <p>&#x2014; Anonymous</p>
 </blockquote>
+<h2 id="definition">Definition</h2>
+<p>A control button is a button in charge of modifying the rich text through user interaction. For example,
+a &quot;B&quot; button icon is often used as the control button for bolding.</p>
+<h2 id="example">Example</h2>
+<p>See this <a href="../walkthrough/bold-italic-underline.html">walkthrough example</a> for how to create your own control buttons.</p>
+<h2 id="explanation">Explanation</h2>
+<p>Control buttons are not a DOM concept, but a bandicoot concept. In bandicoot editors, the control buttons
+often handle the following things:</p>
+<ol>
+<li>Allow the user to modify or insert rich text through user interactions (e.g., clicking on a Bold button).</li>
+<li>Indicate to the user if the control button is &quot;active&quot; for currently selected text (e.g., change the
+Bold button&apos;s color when the currently selected text is bold).</li>
+<li>Handle serialization of inserted and modified rich text so that the correct html string is stored in a database.</li>
+<li>Handle deserialization of rich text so that the correct dom nodes exist in the rich text editor when loading from
+a database html string.</li>
+</ol>
+<p>To accomplish these things, control buttons use <a href="../hooks/use-document-exec-command.html">bandicoot hooks</a>. Code that
+uses bandicoot is in charge of rendering the button and handling the user interaction, but when it&apos;s time to perform
+the rich text logic, a bandicoot hook will actually make the changes to the rich text.</p>
+<p>Control buttons in bandicoot are different than in other rich text libraries because of #3 and #4. Often, rich text libraries
+will split #1 and #2 from #3 and #4 so that there is not one component or file that handles all of those things. However,
+bandicoot&apos;s philosophy is to keep all the logic together for each rich text feature, which means that control buttons
+take on more responsibility.</p>
 
                                 
                                 </section>
@@ -517,7 +553,7 @@ So when there is, you better press it.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Control Button","level":"6.1","depth":1,"next":{"title":"Uncontrolled editor","level":"6.2","depth":1,"path":"concepts/uncontrolled-editor.md","ref":"concepts/uncontrolled-editor.md","articles":[]},"previous":{"title":"RichTextContext","level":"5.1","depth":1,"path":"context/rich-text-context.md","ref":"context/rich-text-context.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"concepts/control-button.md","mtime":"2019-01-26T20:41:50.860Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-26T20:42:37.082Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Control Button","level":"6.1","depth":1,"next":{"title":"Uncontrolled editor","level":"6.2","depth":1,"path":"concepts/uncontrolled-editor.md","ref":"concepts/uncontrolled-editor.md","articles":[]},"previous":{"title":"RichTextContext","level":"5.1","depth":1,"path":"context/rich-text-context.md","ref":"context/rich-text-context.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"concepts/control-button.md","mtime":"2019-01-26T22:07:31.111Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-26T22:08:17.145Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

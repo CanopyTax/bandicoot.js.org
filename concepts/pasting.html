@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Undo / Redo · GitBook</title>
+        <title>Pasting · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="pasting.html" />
     
-    
-    <link rel="prev" href="range.html" />
+    <link rel="prev" href="undo-redo.html" />
     
 
     </head>
@@ -410,7 +408,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="6.6" data-path="undo-redo.html">
+        <li class="chapter " data-level="6.6" data-path="undo-redo.html">
             
                 <a href="undo-redo.html">
             
@@ -423,7 +421,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.7" data-path="pasting.html">
+        <li class="chapter active" data-level="6.7" data-path="pasting.html">
             
                 <a href="pasting.html">
             
@@ -466,7 +464,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Undo / Redo</a>
+        <a href=".." >Pasting</a>
     </h1>
 </div>
 
@@ -481,61 +479,18 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="undo--redo">Undo / Redo</h1>
+                                <h1 id="pasting">Pasting</h1>
 <blockquote>
-<p>asdf...as...asdf</p>
+<p>Has anybody noticed that pasting is sorta like pasta?</p>
 <p>&#x2014; Anonymous</p>
 </blockquote>
 <h2 id="definition">Definition</h2>
-<p>Undo and Redo are operations a user performs through keyboard shortcuts or button clicks.</p>
-<p>In bandicoot editors, a user can always undo or redo their previous actions with the keyboard shortcuts Ctrl/Cmd + Z (undo)
-or Ctrl/Cmd + Y (redo).</p>
-<h2 id="example">Example</h2>
-<p>To undo or redo the last action programmatically, use the <a href="../hooks/use-document-exec-command.html">useDocumentExecCommand</a> hook:</p>
-<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> {useDocumentExecCommand} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;bandicoot&apos;</span>
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">UndoButton</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">const</span> {performCommand} = useDocumentExecCommand(<span class="hljs-string">&apos;undo&apos;</span>)
-
-  <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{performCommand}</span>&gt;</span>
-      Undo
-    <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
-  )
-}
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">UndoButton</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">const</span> {performCommand} = useDocumentExecCommand(<span class="hljs-string">&apos;redo&apos;</span>)
-
-  <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{performCommand}</span>&gt;</span>
-      Redo
-    <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
-  )
-}
-</code></pre>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand#Commands" target="_blank">Read MDN docs for more detail</a></p>
-<h2 id="caviats--notes">Caviats / Notes</h2>
-<p>If you want your dom actions to be &quot;undoable&quot; and &quot;redoable&quot;, you must make your modifications with
-<a href="../hooks/use-document-exec-command.html">document.execCommand</a>, <a href="selection.html">selection</a>, and <a href="range.html">range</a>.</p>
-<p>For example, to delete dom nodes and text in an &quot;undoable&quot; way, you must highlight the text programatically and then delete it
-with execCommand. Doing <code>element.remove()</code> will not result in the operation being &quot;undoable&quot;.</p>
-<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">undoableDelete</span>(<span class="hljs-params">element</span>) </span>{
-  <span class="hljs-comment">// The newRange will highlight the entire element</span>
-  <span class="hljs-keyword">const</span> newRange = <span class="hljs-built_in">document</span>.createRange()
-  newRange.selectNode(element)
-
-  <span class="hljs-comment">// Make that range the active one</span>
-  <span class="hljs-keyword">const</span> selection = <span class="hljs-built_in">window</span>.getSelection()
-  selection.removeAllRanges()
-  selection.addRange(newRange)
-
-  <span class="hljs-comment">// Now delete the the highlighted text with execCommand</span>
-  <span class="hljs-built_in">document</span>.execCommand(<span class="hljs-string">&apos;delete&apos;</span>)
-
-  <span class="hljs-comment">// Now undo/redo will include this operation!</span>
-}
-</code></pre>
+<p>Pasting is when the user attempts to insert content into their rich text editor with Ctrl/Cmd + V.</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/Events/paste" target="_blank">Read more on MDN</a></p>
+<h2 id="what-this-means-for-you">What this means for you</h2>
+<p>Bandicoot currently allows any and all pasting from the user, regardless of the content of their clipboard.</p>
+<p>If you&apos;d like better control over what pastes are allowed or how to process the pasted content,
+please make your voice known in <a href="https://github.com/CanopyTax/bandicoot/issues/1" target="_blank">this Github issue</a>.</p>
 
                                 
                                 </section>
@@ -563,14 +518,10 @@ with execCommand. Doing <code>element.remove()</code> will not result in the ope
 
             
                 
-                <a href="range.html" class="navigation navigation-prev " aria-label="Previous page: Range">
+                <a href="undo-redo.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Undo / Redo">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="pasting.html" class="navigation navigation-next " aria-label="Next page: Pasting">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -579,7 +530,7 @@ with execCommand. Doing <code>element.remove()</code> will not result in the ope
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Undo / Redo","level":"6.6","depth":1,"next":{"title":"Pasting","level":"6.7","depth":1,"path":"concepts/pasting.md","ref":"concepts/pasting.md","articles":[]},"previous":{"title":"Range","level":"6.5","depth":1,"path":"concepts/range.md","ref":"concepts/range.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"concepts/undo-redo.md","mtime":"2019-01-26T22:07:31.111Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-26T22:08:17.145Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Pasting","level":"6.7","depth":1,"previous":{"title":"Undo / Redo","level":"6.6","depth":1,"path":"concepts/undo-redo.md","ref":"concepts/undo-redo.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"concepts/pasting.md","mtime":"2019-01-26T22:07:31.111Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-26T22:08:17.145Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -423,6 +423,19 @@
             
         </li>
     
+        <li class="chapter " data-level="6.7" data-path="pasting.html">
+            
+                <a href="pasting.html">
+            
+                    
+                    Pasting
+            
+                </a>
+            
+
+            
+        </li>
+    
 
     
 
@@ -475,6 +488,27 @@ uncontrolled editors.</p>
 <p>No progress has been made.</p>
 <p>&#x2014; Anonymous</p>
 </blockquote>
+<h2 id="definition">Definition</h2>
+<p>Bandicoot&apos;s <a href="../components/rich-text-editor.html">RichTextEditor</a> component acts like a
+<a href="https://reactjs.org/docs/uncontrolled-components.html" target="_blank">React uncontrolled component</a>.</p>
+<p>What this means is that bandicoot does not have an onChange listener for the
+<a href="content-editable.html">content editable div</a>. Additionally the innerHTML of the
+content editable div is not set by Bandicoot every render. Instead, the browser is the
+only thing that keeps track of what is inside of the editor.</p>
+<h2 id="what-this-means-for-you">What this means for you</h2>
+<p>There is no json state that defines the value of your rich text editor. Instead, only the DOM and HTML keeps track of that.
+This means that you should be storing (or converting to/from) HTML whenever interacting with bandicoot. This does not preclude
+conversion to markdown, but just means that there isn&apos;t a JSON string you&apos;ll have to store in the database on top of that.</p>
+<h2 id="implications-for-bandicoot">Implications for bandicoot</h2>
+<p>To my knowledge, bandicoot is be the only rich text editor library that uses an uncontrolled content editable element.
+Other rich text libraries maintain javascript state that mirrors what is in the DOM.</p>
+<p>One big advantage of treating the editor as an uncontrolled component is that the bandicoot library doesn&apos;t have to do as much work.
+It defers much of the heavy lifting of rich text editing to the browser, including undo/redo, inserting <code>&lt;b&gt;</code> for bolding, keyboard
+shortcuts, and more. Because of this, the bandicoot library is <a href="../#comparison-to-other-rich-text-libraries">significantly smaller</a>
+than other javascript rich text libraries.</p>
+<p>A disadvantage of using an uncontrolled component is that we&apos;re more at the mercy each browser&apos;s implementation of rich text.
+This used to be a showstopper in the Internet Explorer (and older browser) age, since support for many rich text features
+was spotty.</p>
 
                                 
                                 </section>
@@ -518,7 +552,7 @@ uncontrolled editors.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Uncontrolled editor","level":"6.2","depth":1,"next":{"title":"Content Editable","level":"6.3","depth":1,"path":"concepts/content-editable.md","ref":"concepts/content-editable.md","articles":[]},"previous":{"title":"Control Button","level":"6.1","depth":1,"path":"concepts/control-button.md","ref":"concepts/control-button.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"concepts/uncontrolled-editor.md","mtime":"2019-01-26T20:41:50.864Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-26T20:42:37.082Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Uncontrolled editor","level":"6.2","depth":1,"next":{"title":"Content Editable","level":"6.3","depth":1,"path":"concepts/content-editable.md","ref":"concepts/content-editable.md","articles":[]},"previous":{"title":"Control Button","level":"6.1","depth":1,"path":"concepts/control-button.md","ref":"concepts/control-button.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"concepts/uncontrolled-editor.md","mtime":"2019-01-26T22:07:31.111Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-26T22:08:17.145Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

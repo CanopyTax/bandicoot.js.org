@@ -423,6 +423,19 @@
             
         </li>
     
+        <li class="chapter " data-level="6.7" data-path="pasting.html">
+            
+                <a href="pasting.html">
+            
+                    
+                    Pasting
+            
+                </a>
+            
+
+            
+        </li>
+    
 
     
 
@@ -473,6 +486,20 @@
 <p>I would hardly call that content.</p>
 <p>&#x2014; Anonymous</p>
 </blockquote>
+<h2 id="definition">Definition</h2>
+<p>Content editable is the DOM concept that makes in-browser rich text editing possible. It makes it possible
+for users to use HTML to style their input, instead of all input being treated as a raw string.</p>
+<p>In bandicoot, the <a href="../components/rich-text-editor.html">RichTextEditor component</a> is in charge of rendering
+a content editable div.</p>
+<p>You can read more about content editable <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/contentEditable" target="_blank">in these MDN docs</a>.</p>
+<h2 id="example">Example</h2>
+<p>To get started with content editable divs, simply add the <code>contenteditable</code> attribute to a dom element:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">contenteditable</span>=<span class="hljs-string">&quot;true&quot;</span> /&gt;</span>
+</code></pre>
+<p>Now your div will be modifiable by users and can contain rich text. See
+<a href="https://codepen.io/joeldenning/pen/jdqWZO" target="_blank">this code pen</a> for a simple example.</p>
+<p>The good news is that bandicoot takes care of a lot of the content editable stuff without you
+having to think about it.</p>
 
                                 
                                 </section>
@@ -516,7 +543,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Content Editable","level":"6.3","depth":1,"next":{"title":"Selection","level":"6.4","depth":1,"path":"concepts/selection.md","ref":"concepts/selection.md","articles":[]},"previous":{"title":"Uncontrolled editor","level":"6.2","depth":1,"path":"concepts/uncontrolled-editor.md","ref":"concepts/uncontrolled-editor.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"concepts/content-editable.md","mtime":"2019-01-26T20:41:50.860Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-26T20:42:37.082Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Content Editable","level":"6.3","depth":1,"next":{"title":"Selection","level":"6.4","depth":1,"path":"concepts/selection.md","ref":"concepts/selection.md","articles":[]},"previous":{"title":"Uncontrolled editor","level":"6.2","depth":1,"path":"concepts/uncontrolled-editor.md","ref":"concepts/uncontrolled-editor.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"concepts/content-editable.md","mtime":"2019-01-26T22:07:31.111Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-26T22:08:17.145Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

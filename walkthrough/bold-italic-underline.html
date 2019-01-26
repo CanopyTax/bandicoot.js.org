@@ -423,6 +423,19 @@
             
         </li>
     
+        <li class="chapter " data-level="6.7" data-path="../concepts/pasting.html">
+            
+                <a href="../concepts/pasting.html">
+            
+                    
+                    Pasting
+            
+                </a>
+            
+
+            
+        </li>
+    
 
     
 
@@ -507,6 +520,35 @@ and <a href="hookes/use-document-query-command-state.md">useDocumentQueryCommand
 <p>All of bandicoot&apos;s hooks are optional to use and can be composed to create a wide variety of rich text features. The hooks are meant to hide the ugly
 DOM stuff from you so that you can focus on the features of your rich text editor instead.</p>
 <h2 id="now-for-italic-and-underline">Now for italic and underline</h2>
+<p>Italic and underline can be implemented by copying our Bold component with only minor modifications:</p>
+<pre><code class="lang-jsx"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Italic</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> {performCommand} = useDocumentExecCommand(<span class="hljs-string">&apos;italic&apos;</span>)
+  <span class="hljs-keyword">const</span> {isActive} = useDocumentQueryCommandState(<span class="hljs-string">&apos;italic&apos;</span>)
+
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
+      <span class="hljs-attr">onClick</span>=<span class="hljs-string">{performCommand}</span>
+      <span class="hljs-attr">className</span>=<span class="hljs-string">{isActive</span> ? &apos;<span class="hljs-attr">active-control-button</span>&apos; <span class="hljs-attr">:</span> &apos;&apos;}
+    &gt;</span>
+      Italic
+    <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+  )
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Underline</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> {performCommand} = useDocumentExecCommand(<span class="hljs-string">&apos;underline&apos;</span>)
+  <span class="hljs-keyword">const</span> {isActive} = useDocumentQueryCommandState(<span class="hljs-string">&apos;underline&apos;</span>)
+
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
+      <span class="hljs-attr">onClick</span>=<span class="hljs-string">{performCommand}</span>
+      <span class="hljs-attr">className</span>=<span class="hljs-string">{isActive</span> ? &apos;<span class="hljs-attr">active-control-button</span>&apos; <span class="hljs-attr">:</span> &apos;&apos;}
+    &gt;</span>
+      Underline
+    <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+  )
+}
+</code></pre>
 
                                 
                                 </section>
@@ -550,7 +592,7 @@ DOM stuff from you so that you can focus on the features of your rich text edito
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Bold, Italic, and Underline","level":"2.2","depth":1,"next":{"title":"Changing font size","level":"2.3","depth":1,"path":"hooks/use-font-size.md","ref":"hooks/use-font-size.md","articles":[]},"previous":{"title":"Getting Started","level":"2.1","depth":1,"path":"walkthrough/getting-started.md","ref":"walkthrough/getting-started.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"walkthrough/bold-italic-underline.md","mtime":"2019-01-26T20:41:50.864Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-26T20:42:37.082Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Bold, Italic, and Underline","level":"2.2","depth":1,"next":{"title":"Changing font size","level":"2.3","depth":1,"path":"hooks/use-font-size.md","ref":"hooks/use-font-size.md","articles":[]},"previous":{"title":"Getting Started","level":"2.1","depth":1,"path":"walkthrough/getting-started.md","ref":"walkthrough/getting-started.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"walkthrough/bold-italic-underline.md","mtime":"2019-01-26T22:07:31.111Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-26T22:08:17.145Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
