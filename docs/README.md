@@ -2,7 +2,7 @@
 Bandicoot is an npm library for doing rich text with React. It uses [React hooks](https://reactjs.org/docs/hooks-intro.html), is
 only 3.8kb gzipped (12kb ungzipped), and will keep you focused on writing your react components instead of grappling with your rich text editor.
 
-[Github](https://github.com/CanopyTax/bandicoot)
+[Bandicoot Github page](https://github.com/CanopyTax/bandicoot)
 
 [Walkthrough](/walkthrough/getting-started.md)
 
