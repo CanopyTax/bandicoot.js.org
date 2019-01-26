@@ -44,3 +44,33 @@ DOM stuff from you so that you can focus on the features of your rich text edito
 
 
 ## Now for italic and underline
+Italic and underline can be implemented by copying our Bold component with only minor modifications:
+```jsx
+function Italic() {
+  const {performCommand} = useDocumentExecCommand('italic')
+  const {isActive} = useDocumentQueryCommandState('italic')
+
+  return (
+    <button
+      onClick={performCommand}
+      className={isActive ? 'active-control-button' : ''}
+    >
+      Italic
+    </button>
+  )
+}
+
+function Underline() {
+  const {performCommand} = useDocumentExecCommand('underline')
+  const {isActive} = useDocumentQueryCommandState('underline')
+
+  return (
+    <button
+      onClick={performCommand}
+      className={isActive ? 'active-control-button' : ''}
+    >
+      Underline
+    </button>
+  )
+}
+```

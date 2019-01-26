@@ -33,3 +33,4 @@
 * [Selection](concepts/selection.md)
 * [Range](concepts/range.md)
 * [Undo / Redo](concepts/undo-redo.md)
+* [Pasting](concepts/pasting.md)

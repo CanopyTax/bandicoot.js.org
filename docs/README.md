@@ -27,6 +27,8 @@ Here's a very incomplete comparison:
 | TinyMCE   | [353kb](https://unpkg.com/tinymce/)         | GPL 2.1 ([pay for plugins, support, storage, and no product attribution](https://www.tiny.cloud/pricing/))| &#10004;      | &#10004;        | &#10004;        | &#10004;
 | DraftJS   | 210kb [Draft](https://unpkg.com/draft-js/dist/) + [Immutable](https://unpkg.com/immutable/dist/) | MIT (free) | &#10004;      | &#10004;        | &#10004;        | &#10008;
 
+If you're curious how bandicoot got away with being so much smaller, check out [this explanation](/concepts/uncontrolled-editor.md#implications-for-bandicoot).
+
 ## Bandicoot's take
 Bandicoot should enable developers to build an editor that (1) does what they need, (2) doesn't require 200kb of code, and (3) can actually be
 understood, modified, and debugged. Abstraction is a double edged sword: the ideal rich text library is one
