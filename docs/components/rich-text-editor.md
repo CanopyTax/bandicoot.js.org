@@ -1,6 +1,6 @@
 # RichTextEditor
 
-The RichTextEditor component is responsible for rendering a [content editable](/concepts/content-editable) element.
+The RichTextEditor component is responsible for rendering a [content editable](/concepts/content-editable.md) element.
 Additionally it provides the following features:
 - Allows you to set an initial value for the rich text
 - Allows you to forcibly update the html in your rich text editor
