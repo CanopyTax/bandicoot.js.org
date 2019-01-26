@@ -57,7 +57,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../hooks/use-document-exec-command.html" />
+    <link rel="next" href="rich-text-container.html" />
     
     
     <link rel="prev" href="../hooks/use-content-editable-false.html" />
@@ -207,6 +207,19 @@
             
         </li>
     
+        <li class="chapter " data-level="3.2" data-path="rich-text-container.html">
+            
+                <a href="rich-text-container.html">
+            
+                    
+                    RichTextContainer
+            
+                </a>
+            
+
+            
+        </li>
+    
 
     
         
@@ -308,11 +321,31 @@
 
     
         
+        <li class="header">Context</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="../context/rich-text-context.html">
+            
+                <a href="../context/rich-text-context.html">
+            
+                    
+                    RichTextContext
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
         <li class="header">Concepts</li>
         
         
     
-        <li class="chapter " data-level="5.1" data-path="../concepts/control-button.html">
+        <li class="chapter " data-level="6.1" data-path="../concepts/control-button.html">
             
                 <a href="../concepts/control-button.html">
             
@@ -325,7 +358,7 @@
             
         </li>
     
-        <li class="chapter " data-level="5.2" data-path="../concepts/uncontrolled-editor.html">
+        <li class="chapter " data-level="6.2" data-path="../concepts/uncontrolled-editor.html">
             
                 <a href="../concepts/uncontrolled-editor.html">
             
@@ -338,7 +371,7 @@
             
         </li>
     
-        <li class="chapter " data-level="5.3" data-path="../concepts/content-editable.html">
+        <li class="chapter " data-level="6.3" data-path="../concepts/content-editable.html">
             
                 <a href="../concepts/content-editable.html">
             
@@ -351,7 +384,7 @@
             
         </li>
     
-        <li class="chapter " data-level="5.4" data-path="../concepts/selection.html">
+        <li class="chapter " data-level="6.4" data-path="../concepts/selection.html">
             
                 <a href="../concepts/selection.html">
             
@@ -364,12 +397,25 @@
             
         </li>
     
-        <li class="chapter " data-level="5.5" data-path="../concepts/range.html">
+        <li class="chapter " data-level="6.5" data-path="../concepts/range.html">
             
                 <a href="../concepts/range.html">
             
                     
                     Range
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.6" data-path="../concepts/undo-redo.html">
+            
+                <a href="../concepts/undo-redo.html">
+            
+                    
+                    Undo / Redo
             
                 </a>
             
@@ -423,7 +469,91 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="richtexteditor">RichTextEditor</h1>
-<p>Why hello</p>
+<p>The RichTextEditor component is responsible for rendering a <a href="../concepts/content-editable">content editable</a> element.
+Additionally it provides the following features:</p>
+<ul>
+<li>Allows you to set an initial value for the rich text</li>
+<li>Allows you to forcibly update the html in your rich text editor</li>
+<li>Notifies you when it&apos;s time to save your rich text</li>
+<li>Fires events to your <a href="../concepts/control-button.html">control buttons</a> when the selection changes, the editor blurs,
+and more. See the <a href="../context/rich-text-context.html">docs for RichTextContext</a> for more details.</li>
+</ul>
+<p>Note that the RichTextEditor must be rendered inside of a <a href="rich-text-container.html">RichTextContainer</a> component.
+This is because RichTextContainer <a href="https://reactjs.org/docs/context.html#contextprovider" target="_blank">provides React context</a> that is
+consumed by RichTextEditor.</p>
+<h2 id="basic-example">Basic Example</h2>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> {RichTextEditor, RichTextContainer} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;bandicoot&apos;</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyEditor</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RichTextContainer</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">RichTextEditor</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">RichTextContainer</span>&gt;</span>
+  )
+}
+</span></code></pre>
+<h3 id="advanced-example">Advanced Example</h3>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> {useRef} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>
+<span class="hljs-keyword">import</span> {RichTextEditor, RichTextContainer} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;bandicoot&apos;</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyEditor</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> editorRef = useRef(<span class="hljs-literal">null</span>)
+
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RichTextContainer</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{resetEditor}</span>&gt;</span>
+        Reset editor
+      <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{forceSetHTML}</span>&gt;</span>
+        Force set html
+      <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">RichTextEditor</span>
+        <span class="hljs-attr">ref</span>=<span class="hljs-string">{editorRef}</span>
+        <span class="hljs-attr">initalHTML</span>=<span class="hljs-string">{props.htmlSavedInDatabase}</span>
+        <span class="hljs-attr">save</span>=<span class="hljs-string">{save}</span>
+        <span class="hljs-attr">unchangedInterval</span>=<span class="hljs-string">{3000}</span>
+        <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;my-editor&quot;</span>
+      &gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">RichTextContainer</span>&gt;</span>
+  )
+
+  function save(newHTML) {
+    // Will be called on blur or after unchangedInterval
+    fetch(&apos;/api-endpoint&apos;, {
+      method: &apos;PATCH&apos;,
+      body: JSON.stringify({
+        richText: newHTML
+      })
+    })
+  }
+
+  function resetEditor() {
+    editorRef.current.resetEditor()
+  }
+
+  function forceSetHTML() {
+    editorRef.current.setHTML(`<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Some new html for the editor<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>`)
+  }
+}
+</span></code></pre>
+<h2 id="api">API</h2>
+<h3 id="props">Props</h3>
+<ul>
+<li><code>initialHTML</code> (optional): A string of html that will be the editor&apos;s initial value. Defaults to empty string.</li>
+<li><code>save</code> (optional): A function that will be called whenever the editor blurs or no changes are made for an <code>unchangedInterval</code>.
+The <code>save</code> function will be called with one argument, <code>html</code>, that is a serialized html string. Defaults to no-op.</li>
+<li><code>unchangedInterval</code> (optional): An integer number of milliseconds that will be waited before calling <code>save()</code>. Whenever
+  the editor&apos;s value hasn&apos;t been saved and hasn&apos;t changed for <code>unchangedInterval</code> milliseconds, the <code>save()</code> function will be called.
+  Defaults to <code>null</code>, which means that the <code>save()</code> function will only be called on blur.</li>
+<li><code>className</code> (optional): A string className that will be applied to the <a href="../concepts/content-editable.html">content editable</a> element.</li>
+</ul>
+<h3 id="ref">Ref</h3>
+<p>In addition to passing props, you can control the RichTextEditor imperatively with a <a href="https://reactjs.org/docs/glossary.html#refs" target="_blank">React ref</a>.
+The ref has the following properties:</p>
+<ul>
+<li><code>setHTML(html)</code>: A function that will forcibly set the editor to have the new <code>html</code> string as its value.</li>
+<li><code>resetEditor()</code>: A function that you can call to empty out the editor. This is equivalent to calling <code>editorRef.current.setHTML(&apos;&apos;)</code>.</li>
+</ul>
 
                                 
                                 </section>
@@ -456,7 +586,7 @@
                 </a>
                 
                 
-                <a href="../hooks/use-document-exec-command.html" class="navigation navigation-next " aria-label="Next page: useDocumentExecCommand">
+                <a href="rich-text-container.html" class="navigation navigation-next " aria-label="Next page: RichTextContainer">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -467,7 +597,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"RichTextEditor","level":"3.1","depth":1,"next":{"title":"useDocumentExecCommand","level":"4.1","depth":1,"path":"hooks/use-document-exec-command.md","ref":"hooks/use-document-exec-command.md","articles":[]},"previous":{"title":"Atomic Blocks","level":"2.6","depth":1,"path":"hooks/use-content-editable-false.md","ref":"hooks/use-content-editable-false.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"components/rich-text-editor.md","mtime":"2019-01-26T03:59:17.789Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-26T04:00:01.388Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"RichTextEditor","level":"3.1","depth":1,"next":{"title":"RichTextContainer","level":"3.2","depth":1,"path":"components/rich-text-container.md","ref":"components/rich-text-container.md","articles":[]},"previous":{"title":"Atomic Blocks","level":"2.6","depth":1,"path":"hooks/use-content-editable-false.md","ref":"hooks/use-content-editable-false.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"components/rich-text-editor.md","mtime":"2019-01-26T20:41:50.860Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-26T20:42:37.082Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

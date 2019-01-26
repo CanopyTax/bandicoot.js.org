@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Range · GitBook</title>
+        <title>RichTextContainer · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="undo-redo.html" />
+    <link rel="next" href="../hooks/use-document-exec-command.html" />
     
     
-    <link rel="prev" href="selection.html" />
+    <link rel="prev" href="rich-text-editor.html" />
     
 
     </head>
@@ -194,9 +194,9 @@
         
         
     
-        <li class="chapter " data-level="3.1" data-path="../components/rich-text-editor.html">
+        <li class="chapter " data-level="3.1" data-path="rich-text-editor.html">
             
-                <a href="../components/rich-text-editor.html">
+                <a href="rich-text-editor.html">
             
                     
                     RichTextEditor
@@ -207,9 +207,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="../components/rich-text-container.html">
+        <li class="chapter active" data-level="3.2" data-path="rich-text-container.html">
             
-                <a href="../components/rich-text-container.html">
+                <a href="rich-text-container.html">
             
                     
                     RichTextContainer
@@ -345,9 +345,9 @@
         
         
     
-        <li class="chapter " data-level="6.1" data-path="control-button.html">
+        <li class="chapter " data-level="6.1" data-path="../concepts/control-button.html">
             
-                <a href="control-button.html">
+                <a href="../concepts/control-button.html">
             
                     
                     Control Button
@@ -358,9 +358,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.2" data-path="uncontrolled-editor.html">
+        <li class="chapter " data-level="6.2" data-path="../concepts/uncontrolled-editor.html">
             
-                <a href="uncontrolled-editor.html">
+                <a href="../concepts/uncontrolled-editor.html">
             
                     
                     Uncontrolled editor
@@ -371,9 +371,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.3" data-path="content-editable.html">
+        <li class="chapter " data-level="6.3" data-path="../concepts/content-editable.html">
             
-                <a href="content-editable.html">
+                <a href="../concepts/content-editable.html">
             
                     
                     Content Editable
@@ -384,9 +384,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.4" data-path="selection.html">
+        <li class="chapter " data-level="6.4" data-path="../concepts/selection.html">
             
-                <a href="selection.html">
+                <a href="../concepts/selection.html">
             
                     
                     Selection
@@ -397,9 +397,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="6.5" data-path="range.html">
+        <li class="chapter " data-level="6.5" data-path="../concepts/range.html">
             
-                <a href="range.html">
+                <a href="../concepts/range.html">
             
                     
                     Range
@@ -410,9 +410,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.6" data-path="undo-redo.html">
+        <li class="chapter " data-level="6.6" data-path="../concepts/undo-redo.html">
             
-                <a href="undo-redo.html">
+                <a href="../concepts/undo-redo.html">
             
                     
                     Undo / Redo
@@ -453,7 +453,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Range</a>
+        <a href=".." >RichTextContainer</a>
     </h1>
 </div>
 
@@ -468,11 +468,65 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="range">Range</h1>
-<blockquote>
-<p>Wait I thought I only had to learn about selection.</p>
-<p>&#x2014; Anonymous</p>
-</blockquote>
+                                <h1 id="richtextcontainer">RichTextContainer</h1>
+<p>The RichTextContainer component <a href="https://reactjs.org/docs/context.html#contextprovider" target="_blank">provides React context</a> to
+your <a href="rich-text-editor.html">RichTextEditor</a> and <a href="../concepts/control-button.html">control buttons</a>. This allows
+the editor and control buttons to communicate with each other while still letting you render your own control buttons.</p>
+<p>The RichTextEditor and all control buttons must be rendered as children of a RichTextContainer in order for
+bandicoot to work properly.</p>
+<h2 id="basic-example">Basic Example</h2>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> {RichTextContainer, RichTextEditor} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;bandicoot&apos;</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyEditor</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RichTextContainer</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">RichTextEditor</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">RichTextContainer</span>&gt;</span>
+  )
+}
+</span></code></pre>
+<h2 id="advanced-example">Advanced Example</h2>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> {RichTextContainer, RichTextEditor, useDocumentExecCommand, useDocumentQueryCommandState} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;bandicoot&apos;</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyEditor</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> (
+    &lt;RichTextContainer&gt;
+      &lt;div className=&quot;control-buttons&quot;&gt;
+        &lt;Bold /&gt;
+        &lt;Underline /&gt;
+      &lt;/div&gt;
+      &lt;RichTextEditor /&gt;
+    &lt;/RichTextContainer&gt;
+  )
+}
+
+function Bold() {
+  const {performCommand} = useDocumentExecCommand(&apos;bold&apos;)
+  const {isActive} = useDocumentQueryCommandState(&apos;bold&apos;)
+
+  return (
+    &lt;button onClick={performCommand} className={isActive ? &apos;active-button&apos; : &apos;&apos;}&gt;
+      Bold
+    &lt;/button&gt;
+  )
+}
+
+function underline() {
+  const {performCommand} = useDocumentExecCommand(&apos;underline&apos;)
+  const {isActive} = useDocumentQueryCommandState(&apos;underline&apos;)
+
+  return (
+    &lt;button onClick={performCommand} className={isActive ? &apos;active-button&apos; : &apos;&apos;}&gt;
+      Underline
+    &lt;/button&gt;
+  )
+}
+</code></pre>
+<h2 id="api">API</h2>
+<h3 id="props">Props</h3>
+<p>The RichTextContainer component does not accept any props.</p>
+<h3 id="ref">Ref</h3>
+<p>The RichTextContainer does not provide any functionality via a <a href="https://reactjs.org/docs/glossary.html#refs" target="_blank">React ref</a>.</p>
 
                                 
                                 </section>
@@ -500,12 +554,12 @@
 
             
                 
-                <a href="selection.html" class="navigation navigation-prev " aria-label="Previous page: Selection">
+                <a href="rich-text-editor.html" class="navigation navigation-prev " aria-label="Previous page: RichTextEditor">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="undo-redo.html" class="navigation navigation-next " aria-label="Next page: Undo / Redo">
+                <a href="../hooks/use-document-exec-command.html" class="navigation navigation-next " aria-label="Next page: useDocumentExecCommand">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -516,7 +570,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Range","level":"6.5","depth":1,"next":{"title":"Undo / Redo","level":"6.6","depth":1,"path":"concepts/undo-redo.md","ref":"concepts/undo-redo.md","articles":[]},"previous":{"title":"Selection","level":"6.4","depth":1,"path":"concepts/selection.md","ref":"concepts/selection.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"concepts/range.md","mtime":"2019-01-26T20:41:50.860Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-26T20:42:37.082Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"RichTextContainer","level":"3.2","depth":1,"next":{"title":"useDocumentExecCommand","level":"4.1","depth":1,"path":"hooks/use-document-exec-command.md","ref":"hooks/use-document-exec-command.md","articles":[]},"previous":{"title":"RichTextEditor","level":"3.1","depth":1,"path":"components/rich-text-editor.md","ref":"components/rich-text-editor.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"components/rich-text-container.md","mtime":"2019-01-26T20:41:50.860Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-26T20:42:37.082Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

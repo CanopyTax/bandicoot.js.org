@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Range · GitBook</title>
+        <title>RichTextContext · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="undo-redo.html" />
+    <link rel="next" href="../concepts/control-button.html" />
     
     
-    <link rel="prev" href="selection.html" />
+    <link rel="prev" href="../hooks/use-text-as-image.html" />
     
 
     </head>
@@ -325,9 +325,9 @@
         
         
     
-        <li class="chapter " data-level="5.1" data-path="../context/rich-text-context.html">
+        <li class="chapter active" data-level="5.1" data-path="rich-text-context.html">
             
-                <a href="../context/rich-text-context.html">
+                <a href="rich-text-context.html">
             
                     
                     RichTextContext
@@ -345,9 +345,9 @@
         
         
     
-        <li class="chapter " data-level="6.1" data-path="control-button.html">
+        <li class="chapter " data-level="6.1" data-path="../concepts/control-button.html">
             
-                <a href="control-button.html">
+                <a href="../concepts/control-button.html">
             
                     
                     Control Button
@@ -358,9 +358,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.2" data-path="uncontrolled-editor.html">
+        <li class="chapter " data-level="6.2" data-path="../concepts/uncontrolled-editor.html">
             
-                <a href="uncontrolled-editor.html">
+                <a href="../concepts/uncontrolled-editor.html">
             
                     
                     Uncontrolled editor
@@ -371,9 +371,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.3" data-path="content-editable.html">
+        <li class="chapter " data-level="6.3" data-path="../concepts/content-editable.html">
             
-                <a href="content-editable.html">
+                <a href="../concepts/content-editable.html">
             
                     
                     Content Editable
@@ -384,9 +384,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.4" data-path="selection.html">
+        <li class="chapter " data-level="6.4" data-path="../concepts/selection.html">
             
-                <a href="selection.html">
+                <a href="../concepts/selection.html">
             
                     
                     Selection
@@ -397,9 +397,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="6.5" data-path="range.html">
+        <li class="chapter " data-level="6.5" data-path="../concepts/range.html">
             
-                <a href="range.html">
+                <a href="../concepts/range.html">
             
                     
                     Range
@@ -410,9 +410,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.6" data-path="undo-redo.html">
+        <li class="chapter " data-level="6.6" data-path="../concepts/undo-redo.html">
             
-                <a href="undo-redo.html">
+                <a href="../concepts/undo-redo.html">
             
                     
                     Undo / Redo
@@ -453,7 +453,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Range</a>
+        <a href=".." >RichTextContext</a>
     </h1>
 </div>
 
@@ -468,11 +468,85 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="range">Range</h1>
-<blockquote>
-<p>Wait I thought I only had to learn about selection.</p>
-<p>&#x2014; Anonymous</p>
-</blockquote>
+                                <h1 id="richtextcontext">RichTextContext</h1>
+<p>RichTextContext is <a href="https://reactjs.org/docs/context.html" target="_blank">React context</a> that is used by bandicoot&apos;s built-in
+components and hooks.</p>
+<p>The context value is provided by <a href="../components/rich-text-container.html">RichTextContainer</a> and is consumed by
+<a href="../components/rich-text-editor.html">RichTextEditor</a> and the <a href="../hooks/use-document-exec-command.html">bandicoot hooks</a>.</p>
+<h2 id="a-word-of-caution">A word of caution</h2>
+<p>Although RichTextContext is exported from bandicoot, you normally do not need to use it directly.
+Instead, you should be able to accomplish most of what you need via <a href="../hooks/use-document-exec-command.html">bandicoot&apos;s built-in hooks</a>.</p>
+<p>So before using RichTextContext directly, look for a hook that already does what you need. If you
+find a use case not supported by the current hooks, consider <a href="https://github.com/CanopyTax/bandicoot/issues/new" target="_blank">opening a Github issue</a>
+where we can discuss adding a new hook to bandicoot. That way, everyone will benefit from your work.</p>
+<h2 id="example">Example</h2>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> {useContext, useState} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>
+<span class="hljs-keyword">import</span> {RichTextContext} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;bandicoot&apos;</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyControlButton</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> richTextContext = useContext(RichTextContext)
+  <span class="hljs-keyword">const</span> [numSelectionChanges, setNumSelectionChanges] = useState(<span class="hljs-number">0</span>)
+
+  useEffect(() =&gt; {
+    richTextContext.addSelectionChangedListener(selectionChanged)
+    <span class="hljs-keyword">return</span> () =&gt; richTextContext.removeSelectionChangedListener(selectionChanged)
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">selectionChanged</span>(<span class="hljs-params"></span>) </span>{
+      <span class="hljs-keyword">const</span> selection = <span class="hljs-built_in">window</span>.getSelection()
+      setNumSelectionChanges(numSelectionChanges + <span class="hljs-number">1</span>)
+    }
+  }, [richTextContext, numSelectionChanges, setNumSelectionChanges])
+
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      Within the rich text editor, the selection has changed {numSelectionChanges} times.
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  )
+}
+</code></pre>
+<h2 id="api">API</h2>
+<p>Since the value provided by RichTextContext is exported from bandicoot, it is considered part of bandicoot&apos;s public API.
+Changes to RichTextContext will follow semantic versioning rules.</p>
+<p>The value provided is an object with the following properties:</p>
+<ul>
+<li><code>addSelectionChangedListener(listener)</code>: A function that must be given a listener function as an argument. The <code>listener</code> will be called
+whenever the selection changes <strong>within the rich text editor</strong>. Selection changes outside of the rich text editor will be ignored.</li>
+<li><code>removeSelectionChangedListener(listener)</code>: A function that must be given a listener function as an argument. The <code>listener</code> will be removed
+so that it is no longer called when the selection changes.</li>
+<li><code>fireSelectionChanged()</code>: A function that is called by RichTextEditor to notify all listeners of a selection change within the editor. This
+function should probably only be called by RichTextEditor, not by custom hooks or user logic.</li>
+<li><code>selectRangeFromBeforeBlur()</code>: A function that you should call when you want to ensure that the rich text editor is focused and contains
+the current <a href="../concepts/selection.html">selection</a>. If a blur event has occurred and the rich text editor is no longer focused, this will
+select the text that was selected before the blur.</li>
+<li><code>addBlurListener(listener)</code>: A function that must be given a listener function as an argument. The <code>listener</code> will be called whenever
+the rich text editor&apos;s <a href="../concepts/content-editable.html">content editable</a> element is blurred.</li>
+<li><code>removeBlurListener(listener)</code>: A function that must be given a listener function as an argument. The <code>listener</code> will be removed so that
+it is no longer called when blur events occur.</li>
+<li><code>fireBlur()</code>: A function that is called by RichTextEditor to notify all listeners that the <a href="../concepts/content-editable.html">content editable</a>
+element has blurred. This function should probably not be called by any code except the RichTextEditor.</li>
+<li><code>addNewHTMLListener(listener)</code>: A function that must be given a listener function as an argument. The <code>listener</code> will be called with no
+arguments whenever the rich text editor is forcibly updated to have new HTML content (via <code>editorRef.current.setHTML()</code>). To access the
+new HTML, use <code>richTextContext.getContentEditableElement().querySelector(&apos;.thing-im-interested-in&apos;)</code>. This is how you can control
+deserialization, and it is often used in conjunction with <code>addSerializer</code>.</li>
+<li><code>removeNewHTMLListener(listener)</code>: A function that must be given a listener function as an argument. The <code>listener</code> will be removed
+and no longer called when there is no HTML.</li>
+<li><code>fireNewHTML()</code>: A function that is called by RichTextEditor to notify all listeners that new html has been forcibly set for the editor.
+This function should probably not be called by any code except for the RichTextEditor itself.</li>
+<li><code>isFocused()</code>: A function that can be called to learn if the rich text editor is currently focused or not. Returns a boolean.</li>
+<li><code>getContentEditableElement()</code>: A function that will return the content editable dom element that was rendered by RichTextEditor.
+Be careful with this one -- it is needed to implement things but also gives you access to the entire rich text dom which means that
+you could break not only your own componet/hook, but also other components and hooks.</li>
+<li><code>addSerializer(serializer)</code>: A function that must be given a serializer function as an argument. A serializer is a function that will be called
+with a DOM element right before the dom is turned into an HTML string. The serializer should modify the dom element however it would like to
+in preparation for the rich text html to be saved. This is often used in conjunction with <code>addNewHTMLListener</code>, which allows you to control
+deserialization.</li>
+<li><code>removeSerializer(serializer)</code>: A function that must be given a serializer function as an argument. The provided serializer will be
+removed so that it is no longer called when html is about to be serialized.</li>
+<li><code>numSerializers()</code>: A function that will return the number of currently active serializers. This is used by RichTextEditor and probably
+doesn&apos;t need to be used by any other code.</li>
+<li><code>serialize(dom)</code>: A function that must be given a DOM node as an argument. This function is called by RichTextEditor and returns the DOM
+element that has been modified. The only code that should call this function is RichTextEditor itself.</li>
+</ul>
 
                                 
                                 </section>
@@ -500,12 +574,12 @@
 
             
                 
-                <a href="selection.html" class="navigation navigation-prev " aria-label="Previous page: Selection">
+                <a href="../hooks/use-text-as-image.html" class="navigation navigation-prev " aria-label="Previous page: useTextAsImage">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="undo-redo.html" class="navigation navigation-next " aria-label="Next page: Undo / Redo">
+                <a href="../concepts/control-button.html" class="navigation navigation-next " aria-label="Next page: Control Button">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -516,7 +590,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Range","level":"6.5","depth":1,"next":{"title":"Undo / Redo","level":"6.6","depth":1,"path":"concepts/undo-redo.md","ref":"concepts/undo-redo.md","articles":[]},"previous":{"title":"Selection","level":"6.4","depth":1,"path":"concepts/selection.md","ref":"concepts/selection.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"concepts/range.md","mtime":"2019-01-26T20:41:50.860Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-26T20:42:37.082Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"RichTextContext","level":"5.1","depth":1,"next":{"title":"Control Button","level":"6.1","depth":1,"path":"concepts/control-button.md","ref":"concepts/control-button.md","articles":[]},"previous":{"title":"useTextAsImage","level":"4.7","depth":1,"path":"hooks/use-text-as-image.md","ref":"hooks/use-text-as-image.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"context/rich-text-context.md","mtime":"2019-01-26T20:41:50.864Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-26T20:42:37.082Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
