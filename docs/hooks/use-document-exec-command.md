@@ -1,6 +1,6 @@
 # useDocumentExecCommand
 It turns out that browsers support many rich text editing basics with a one-liner: [`document.execCommand(commandName)`](https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand).
-The `useDocumentExecCommand` hook provides the logic for doing so in a way that you don't have to worry about managing the [selection](https://developer.mozilla.org/en-US/docs/Web/API/Selection).
+The `useDocumentExecCommand` hook provides the logic for doing so in a way that you don't have to worry about managing the [selection](/concepts/selection.md).
 
 To see a list of rich text features you can implement with this, check out [this MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand#Commands).
 

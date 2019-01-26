@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rimraf _book && gitbook build && copyfiles CNAME _book",
-    "watch": "gitbook serve"
+    "start": "gitbook serve"
   },
   "dependencies": {
     "copyfiles": "^2.1.0",

@@ -73,7 +73,7 @@ const {chooseFile, removeImage} = useImage({processImgElement, fileBlobToUrl})
 - `fileBlobToUrl` (optional): A function that will be called whenever the user has picked a file from their computer to insert into the rich text
   editor. The `fileBlobToUrl` function will be called with one argument, a [`File`](https://developer.mozilla.org/en-US/docs/Web/API/File).
   The return value of `fileBlobToUrl` must be a promise that resolves with a string url for that FileBlog object. This is useful for uploading a
-  file to a server before inserting it into the DOM.
+  file to a server before inserting it into the DOM. Defaults to calling [`URL.createObjectURL(file)`](https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL).
 
 ## Return value
 `useImage` returns an object with the following properties:

@@ -2,7 +2,7 @@
 Browsers support detecting if the currently selected text is bolded, underlined, italicized, and much more with a one liner: [`document.queryCommandState(commandName)`](https://developer.mozilla.org/en-US/docs/Web/API/Document/queryCommandState).
 Additionally, you can detect what the current value is (e.g., font family is "Arial") with `document.queryCommandValue(commandName)`.
 
-The `useDocumentQueryCommandState` hook provides the logic for doing so without you having to deal with the DOM or [selection](https://developer.mozilla.org/en-US/docs/Web/API/Selection).
+The `useDocumentQueryCommandState` hook provides the logic for doing so without you having to deal with the DOM or [selection](/concepts/selection.md).
 
 To see a list of rich text features that you can use this with, check out [this MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand#Commands).
 

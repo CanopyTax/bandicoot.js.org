@@ -8,7 +8,7 @@ only 3.8kb gzipped (12kb ungzipped), and will keep you focused on writing your r
 
 [Hooks](/hooks/use-document-exec-command.md)
 
-[Concepts](/concepts/README.md)
+[Concepts](/concepts/control-button.md)
 
 ## Browser support
 Bandicoot has been tested in Safari 10+, Edge 14+, Chrome, and Firefox. It does not support IE11.
