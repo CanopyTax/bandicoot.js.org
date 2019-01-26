@@ -1,0 +1,12 @@
+{
+  "name": "bandicoot.js.org",
+  "repository": "git@github.com:CanopyTax/bandicoot.js.org.git",
+  "author": "Joel Denning <joeldenning@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "gitbook build"
+  },
+  "dependencies": {
+    "gitbook-cli": "^2.3.2"
+  }
+}
