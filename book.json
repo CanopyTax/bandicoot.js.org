@@ -1,3 +1,12 @@
 {
-  "root": "./docs"
+  "root": "./docs",
+  "plugins": ["-sharing", "github", "ga"],
+  "pluginsConfig": {
+    "github": {
+      "url": "https://github.com/CanopyTax/bandicoot"
+    },
+    "ga": {
+      "token": "UA-133316058-1"
+    }
+  }
 }

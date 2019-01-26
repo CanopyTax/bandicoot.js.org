@@ -999,6 +999,16 @@ gitbook-cli@^2.3.2:
     tmp "0.0.31"
     user-home "2.0.0"
 
+gitbook-plugin-ga@^1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/gitbook-plugin-ga/-/gitbook-plugin-ga-1.0.1.tgz#c85d7b8c01640c4bb3dc3b231ab9fe74aa6e521b"
+  integrity sha1-yF17jAFkDEuz3DsjGrn+dKpuUhs=
+
+gitbook-plugin-github@^2:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/gitbook-plugin-github/-/gitbook-plugin-github-2.0.0.tgz#5166e763cfcc402d432880b7a6c85c1c54b56a8d"
+  integrity sha1-UWbnY8/MQC1DKIC3pshcHFS1ao0=
+
 github-url-from-git@~1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/github-url-from-git/-/github-url-from-git-1.4.0.tgz#285e6b520819001bde128674704379e4ff03e0de"
