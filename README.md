@@ -1,2 +1,2 @@
 # bandicoot.js.org
-The bandicoot.js.org documentation website
+https://bandicoot.js.org -- the website for [bandicoot](https://github.com/CanopyTax/bandicoot)
