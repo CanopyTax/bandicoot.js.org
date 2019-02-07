@@ -22,6 +22,7 @@
 * [useLink](hooks/use-link.md)
 * [useContentEditableFalse](hooks/use-content-editable-false.md)
 * [useTextAsImage](hooks/use-text-as-image.md)
+* [useElementDeletionDetection](hooks/use-element-deletion-detection.md)
 
 ## Context
 * [RichTextContext](context/rich-text-context.md)
