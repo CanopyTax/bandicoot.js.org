@@ -81,6 +81,8 @@ function MyEditor() {
     the editor's value hasn't been saved and hasn't changed for `unchangedInterval` milliseconds, the `save()` function will be called.
     Defaults to `null`, which means that the `save()` function will only be called on blur.
 - `className` (optional): A string className that will be applied to the [content editable](/concepts/content-editable.md) element.
+- `placeholder` (optional): A string placeholder that will be shown when the rich text editor is empty.
+- `placeholderColor` (optional): A string css color for the placeholderText. Defaults to `#CFCFCF`.
 
 ### Ref
 In addition to passing props, you can control the RichTextEditor imperatively with a [React ref](https://reactjs.org/docs/glossary.html#refs).
