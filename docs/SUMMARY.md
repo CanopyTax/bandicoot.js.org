@@ -6,6 +6,7 @@
 * [Getting Started](walkthrough/getting-started.md)
 * [Bold, Italic, and Underline](walkthrough/bold-italic-underline.md)
 * [Changing font size](hooks/use-font-size.md)
+* [H1, H2, H3](walkthrough/headers.md)
 * [Inserting images](hooks/use-image.md)
 * [Inserting links](hooks/use-link.md)
 * [Atomic Blocks](hooks/use-content-editable-false.md)
