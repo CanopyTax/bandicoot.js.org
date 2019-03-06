@@ -83,6 +83,8 @@ function MyEditor() {
 - `className` (optional): A string className that will be applied to the [content editable](/concepts/content-editable.md) element.
 - `placeholder` (optional): A string placeholder that will be shown when the rich text editor is empty.
 - `placeholderColor` (optional): A string css color for the placeholderText. Defaults to `#CFCFCF`.
+- `pasteFn` (optional): A function that will be called whenever the user pastes to the editor. The function will be called with a string of text and
+    must return a string that will be pasted.
 
 ### Ref
 In addition to passing props, you can control the RichTextEditor imperatively with a [React ref](https://reactjs.org/docs/glossary.html#refs).
