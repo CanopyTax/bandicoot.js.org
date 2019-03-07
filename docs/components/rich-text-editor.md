@@ -92,3 +92,4 @@ The ref has the following properties:
 - `setHTML(html)`: A function that will forcibly set the editor to have the new `html` string as its value.
 - `getHTML()`: A function that returns serialized HTML as a string. The `html` returned is the same as what is given to the `props.save` function.
 - `resetEditor()`: A function that you can call to empty out the editor. This is equivalent to calling `editorRef.current.setHTML('')`.
+- `focus()`: A function that you can call to forcibly focus the editor.
