@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Bold, Italic, and Underline · GitBook</title>
+        <title>Serialization · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../hooks/use-font-size.html" />
     
-    
-    <link rel="prev" href="getting-started.html" />
+    <link rel="prev" href="pasting.html" />
     
 
     </head>
@@ -109,9 +107,9 @@
         
         
     
-        <li class="chapter " data-level="2.1" data-path="getting-started.html">
+        <li class="chapter " data-level="2.1" data-path="../walkthrough/getting-started.html">
             
-                <a href="getting-started.html">
+                <a href="../walkthrough/getting-started.html">
             
                     
                     Getting Started
@@ -122,9 +120,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="2.2" data-path="bold-italic-underline.html">
+        <li class="chapter " data-level="2.2" data-path="../walkthrough/bold-italic-underline.html">
             
-                <a href="bold-italic-underline.html">
+                <a href="../walkthrough/bold-italic-underline.html">
             
                     
                     Bold, Italic, and Underline
@@ -358,9 +356,9 @@
         
         
     
-        <li class="chapter " data-level="6.1" data-path="../concepts/control-button.html">
+        <li class="chapter " data-level="6.1" data-path="control-button.html">
             
-                <a href="../concepts/control-button.html">
+                <a href="control-button.html">
             
                     
                     Control Button
@@ -371,9 +369,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.2" data-path="../concepts/uncontrolled-editor.html">
+        <li class="chapter " data-level="6.2" data-path="uncontrolled-editor.html">
             
-                <a href="../concepts/uncontrolled-editor.html">
+                <a href="uncontrolled-editor.html">
             
                     
                     Uncontrolled editor
@@ -384,9 +382,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.3" data-path="../concepts/content-editable.html">
+        <li class="chapter " data-level="6.3" data-path="content-editable.html">
             
-                <a href="../concepts/content-editable.html">
+                <a href="content-editable.html">
             
                     
                     Content Editable
@@ -397,9 +395,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.4" data-path="../concepts/selection.html">
+        <li class="chapter " data-level="6.4" data-path="selection.html">
             
-                <a href="../concepts/selection.html">
+                <a href="selection.html">
             
                     
                     Selection
@@ -410,9 +408,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.5" data-path="../concepts/range.html">
+        <li class="chapter " data-level="6.5" data-path="range.html">
             
-                <a href="../concepts/range.html">
+                <a href="range.html">
             
                     
                     Range
@@ -423,9 +421,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.6" data-path="../concepts/undo-redo.html">
+        <li class="chapter " data-level="6.6" data-path="undo-redo.html">
             
-                <a href="../concepts/undo-redo.html">
+                <a href="undo-redo.html">
             
                     
                     Undo / Redo
@@ -436,9 +434,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.7" data-path="../concepts/pasting.html">
+        <li class="chapter " data-level="6.7" data-path="pasting.html">
             
-                <a href="../concepts/pasting.html">
+                <a href="pasting.html">
             
                     
                     Pasting
@@ -449,9 +447,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.8" data-path="../concepts/serialization.html">
+        <li class="chapter active" data-level="6.8" data-path="serialization.html">
             
-                <a href="../concepts/serialization.html">
+                <a href="serialization.html">
             
                     
                     Serialization
@@ -492,7 +490,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Bold, Italic, and Underline</a>
+        <a href=".." >Serialization</a>
     </h1>
 </div>
 
@@ -507,74 +505,32 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="bold-italic-and-underline">Bold, Italic, and Underline</h1>
-<p>Let&apos;s add a <a href="../concepts/control-button.html">control button</a> for bolding the rich text:</p>
-<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> {RichTextContainer, RichTextEditor, useDocumentExecCommand, useDocumentQueryCommandState} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;bandicoot&apos;</span>
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyComponent</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">return</span> (
-    &lt;RichTextContainer&gt;
-      &lt;Bold /&gt;
-      &lt;RichTextEditor /&gt;
-    &lt;/RichTextContainer&gt;
-  )
-}
-
-function Bold() {
-  const {performCommand} = useDocumentExecCommand(&apos;bold&apos;)
-  const {isActive} = useDocumentQueryCommandState(&apos;bold&apos;)
-
-  return (
-    &lt;button
-      onClick={performCommand}
-      className={isActive ? &apos;active-control-button&apos; : &apos;&apos;}
-    &gt;
-      Bold
-    &lt;/button&gt;
-  )
-}
-</code></pre>
-<p>Now we have a bold button that, when clicked, will toggle the highlighted text to either be bolded or not bolded. Additionally, when the
-user selects a bolded part of the editor, the bold button will have an extra css class on it to indicate this to the user. Notice that
-bandicoot did not render the button itself, but just provided a <code>performCommand</code> function and an <code>isActive</code> boolean for us to
-use on a button that we render on our own. This allows us to position and style the Bold button however we&apos;d like to, without having
-to worry about the DOM interactions for bolding/unbolding.</p>
-<p>This use of <a href="https://reactjs.org/docs/hooks-intro.html" target="_blank">React hooks</a> is the pattern that bandicoot employs whenever you need to implement a new
-&quot;control button&quot;. Italics, underlining, font size, links, images, and read-only elements can all be achieved by importing a bandicoot hook and using the hook inside of
-your component. Check out the docs for <a href="../hooks/use-document-exec-command.html">useDocumentExecCommand</a>
-and <a href="hookes/use-document-query-command-state.md">useDocumentQueryCommandState</a> for more information on the two hooks used here.</p>
-<p>All of bandicoot&apos;s hooks are optional to use and can be composed to create a wide variety of rich text features. The hooks are meant to hide the ugly
-DOM stuff from you so that you can focus on the features of your rich text editor instead.</p>
-<h2 id="now-for-italic-and-underline">Now for italic and underline</h2>
-<p>Italic and underline can be implemented by copying our Bold component with only minor modifications:</p>
-<pre><code class="lang-jsx"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Italic</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">const</span> {performCommand} = useDocumentExecCommand(<span class="hljs-string">&apos;italic&apos;</span>)
-  <span class="hljs-keyword">const</span> {isActive} = useDocumentQueryCommandState(<span class="hljs-string">&apos;italic&apos;</span>)
-
-  <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
-      <span class="hljs-attr">onClick</span>=<span class="hljs-string">{performCommand}</span>
-      <span class="hljs-attr">className</span>=<span class="hljs-string">{isActive</span> ? &apos;<span class="hljs-attr">active-control-button</span>&apos; <span class="hljs-attr">:</span> &apos;&apos;}
-    &gt;</span>
-      Italic
-    <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
-  )
-}
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Underline</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">const</span> {performCommand} = useDocumentExecCommand(<span class="hljs-string">&apos;underline&apos;</span>)
-  <span class="hljs-keyword">const</span> {isActive} = useDocumentQueryCommandState(<span class="hljs-string">&apos;underline&apos;</span>)
-
-  <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span>
-      <span class="hljs-attr">onClick</span>=<span class="hljs-string">{performCommand}</span>
-      <span class="hljs-attr">className</span>=<span class="hljs-string">{isActive</span> ? &apos;<span class="hljs-attr">active-control-button</span>&apos; <span class="hljs-attr">:</span> &apos;&apos;}
-    &gt;</span>
-      Underline
-    <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
-  )
-}
-</code></pre>
+                                <h1 id="serialization">Serialization</h1>
+<blockquote>
+<p>It&apos;s got corn for crunch, oats for punch, and it stays crunchy, even in milk.</p>
+<p>&#x2014; Cap&apos;n Crunch</p>
+</blockquote>
+<h2 id="definition">Definition</h2>
+<p>Serialization is the programming concept of turning objects into strings. In the context of bandicoot, serialization refers
+to turning the rich text editor DOM elements into an HTML string (so that you can be save it to a database).</p>
+<p>Deserialization is the converse - turning strings into objects. In bandicoot, deserialization refers turning an html string
+into DOM elements.</p>
+<h2 id="what-this-means-for-you">What this means for you</h2>
+<h3 id="serialization">Serialization</h3>
+<p>Bandicoot currently only supports serialization to an HTML string. Markdown format is not baked into bandicoot, although there
+are html-to-markdown libraries on NPM that can be used in conjunction with bandicoot.</p>
+<p>Bandicoot uses <code>domElement.innerHTML</code> to serialize the dom elements rich text editor to an HTML string. The serialization can be
+customized with <a href="../context/rich-text-context.html"><code>richTextContext.addSerializer()</code></a>. Serialized html strings are then given as an argument
+to RichTextEditor&apos;s <code>save()</code> prop.</p>
+<h3 id="deserialization">Deserialization</h3>
+<p>Bandicoot accomplishes deserialization via React&apos;s <a href="https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml" target="_blank">dangerouslySetInnerHTML</a>.
+React calls it dangerous for good reason -- if the HTML string has a <code>&lt;script&gt;</code> element or other javascript embedded into the dom elements,
+that javascript will be executed during deserialization. This is a security risk known as
+<a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank">cross site scripting (XSS)</a>.</p>
+<p>Cross site scripting is something you need to avoid in your code. To do so, the HTML string needs to be
+<a href="https://en.wikipedia.org/wiki/HTML_sanitization" target="_blank">sanitized</a>. Bandicoot does not currently automatically sanitize your HTML
+before using dangerouslySetInnerHTML. If you&apos;d like to see that change, please open an issue. Because of this, your code will need
+to do html sanitization itself. The <a href="https://github.com/punkave/sanitize-html" target="_blank">sanitize-html</a> library is one option for doing so.</p>
 
                                 
                                 </section>
@@ -602,14 +558,10 @@ DOM stuff from you so that you can focus on the features of your rich text edito
 
             
                 
-                <a href="getting-started.html" class="navigation navigation-prev " aria-label="Previous page: Getting Started">
+                <a href="pasting.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Pasting">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="../hooks/use-font-size.html" class="navigation navigation-next " aria-label="Next page: Changing font size">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -618,7 +570,7 @@ DOM stuff from you so that you can focus on the features of your rich text edito
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Bold, Italic, and Underline","level":"2.2","depth":1,"next":{"title":"Changing font size","level":"2.3","depth":1,"path":"hooks/use-font-size.md","ref":"hooks/use-font-size.md","articles":[]},"previous":{"title":"Getting Started","level":"2.1","depth":1,"path":"walkthrough/getting-started.md","ref":"walkthrough/getting-started.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","github","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/CanopyTax/bandicoot"},"ga":{"configuration":"auto","token":"UA-133316058-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"walkthrough/bold-italic-underline.md","mtime":"2019-03-07T18:11:58.557Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-07T18:12:43.013Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Serialization","level":"6.8","depth":1,"previous":{"title":"Pasting","level":"6.7","depth":1,"path":"concepts/pasting.md","ref":"concepts/pasting.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","github","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/CanopyTax/bandicoot"},"ga":{"configuration":"auto","token":"UA-133316058-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"concepts/serialization.md","mtime":"2019-03-07T18:11:58.557Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-07T18:12:43.013Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

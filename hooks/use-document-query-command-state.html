@@ -449,6 +449,19 @@
             
         </li>
     
+        <li class="chapter " data-level="6.8" data-path="../concepts/serialization.html">
+            
+                <a href="../concepts/serialization.html">
+            
+                    
+                    Serialization
+            
+                </a>
+            
+
+            
+        </li>
+    
 
     
 
@@ -499,7 +512,7 @@
 Additionally, you can detect what the current value is (e.g., font family is &quot;Arial&quot;) with <code>document.queryCommandValue(commandName)</code>.</p>
 <p>The <code>useDocumentQueryCommandState</code> hook provides the logic for doing so without you having to deal with the DOM or <a href="../concepts/selection.html">selection</a>.</p>
 <p>To see a list of rich text features that you can use this with, check out <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand#Commands" target="_blank">this MDN documentation</a>.</p>
-<h2 id="example">Example</h2>
+<h2 id="basic-example">Basic Example</h2>
 <pre><code class="lang-jsx"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Bold</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-comment">// isActive is a boolean that indicates if the currently selected text is bold.</span>
   <span class="hljs-keyword">const</span> {isActive} = useDocumentQueryCommandState(<span class="hljs-string">&apos;bold&apos;</span>)
@@ -520,12 +533,26 @@ Additionally, you can detect what the current value is (e.g., font family is &qu
   )
 }
 </code></pre>
+<h2 id="advanced-example">Advanced Example</h2>
+<p>If you wish to customize when <code>isActive</code> is true, you can pass in a second argument to the hook. The second argument is
+a string value that will be compared to the return value of <code>document.queryCommandValue(commandName)</code>.</p>
+<pre><code class="lang-jsx"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">IsH1</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> {isActive} = useDocumentQueryCommandState(<span class="hljs-string">&apos;formatBlock&apos;</span>, <span class="hljs-string">&apos;h1&apos;</span>);
+
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{isActive</span> ? &apos;<span class="hljs-attr">green</span>&apos; <span class="hljs-attr">:</span> &apos;&apos;}&gt;</span>This text is green when the selected text is an H1 element<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  )
+}
+</code></pre>
 <h2 id="api">API</h2>
-<pre><code class="lang-js"><span class="hljs-keyword">const</span> {isActive, activeValue} = useDocumentQueryCommandState(commandName)
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> {isActive, activeValue} = useDocumentQueryCommandState(commandName, activeValueMatch)
 </code></pre>
 <h3 id="arguments">Arguments</h3>
 <ul>
 <li><code>commandName</code> (required): The <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand#Commands" target="_blank">document command</a> that you want to check the status of.</li>
+<li><code>activeValueMatch</code> (optional): A string that allows you to customize when <code>isActive</code> is true or false. When omitted, <code>isActive</code> is simply the return value of
+<code>document.queryCommandState(commandName)</code>, but when <code>activeValueMatch</code> is provided, <code>isActive</code> will be true when <code>document.queryCommandValue(commandName)</code> equals
+the provided <code>activeValueMatch</code>.</li>
 </ul>
 <h3 id="return-value">Return value</h3>
 <p>An object with the following properties:</p>
@@ -576,7 +603,7 @@ Additionally, you can detect what the current value is (e.g., font family is &qu
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"useDocumentQueryCommandState","level":"4.2","depth":1,"next":{"title":"useFontSize","level":"4.3","depth":1,"path":"hooks/use-font-size.md","ref":"hooks/use-font-size.md","articles":[]},"previous":{"title":"useDocumentExecCommand","level":"4.1","depth":1,"path":"hooks/use-document-exec-command.md","ref":"hooks/use-document-exec-command.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","github","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/CanopyTax/bandicoot"},"ga":{"configuration":"auto","token":"UA-133316058-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"hooks/use-document-query-command-state.md","mtime":"2019-03-06T22:36:20.166Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-06T22:37:12.365Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"useDocumentQueryCommandState","level":"4.2","depth":1,"next":{"title":"useFontSize","level":"4.3","depth":1,"path":"hooks/use-font-size.md","ref":"hooks/use-font-size.md","articles":[]},"previous":{"title":"useDocumentExecCommand","level":"4.1","depth":1,"path":"hooks/use-document-exec-command.md","ref":"hooks/use-document-exec-command.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","github","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/CanopyTax/bandicoot"},"ga":{"configuration":"auto","token":"UA-133316058-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"hooks/use-document-query-command-state.md","mtime":"2019-03-07T18:11:58.557Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-07T18:12:43.013Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
