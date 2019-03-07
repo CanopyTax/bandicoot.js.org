@@ -80,8 +80,9 @@ const {insertLink, getTextFromBeforeBlur, selectEntireLink, unlink} = useLink({p
 
 ### Arguments
 The `useLink` hook optionally takes in one object argument with the following properties:
-- `processAnchorElement` (optional): A function that will be called every time a new link is inserted into the rich text editor.
-  This function is called with the `<a>` dom element and can be used to set up click listeners, change the style, etc.
+- `processAnchorElement` (optional): A function that will be called with each `<a>` dom element in the rich text editor. This can be used
+  to set up click listeners, change the style, etc. The function will be called for anchor elements in the initialHTML, calls to setHTML, and also for
+  every anchor element that is inserted via `useLink()`. Defaults to a no-op function.
 
 ### Return value
 The `useLink` hook returns an object with the following properties:
