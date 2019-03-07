@@ -76,8 +76,9 @@ const {insertContentEditableFalseElement} = useContentEditableFalse({processCont
 
 ### Arguments
 `useContentEditableFalse` can be called with no arguments or with an object with the following properties:
-- `processContentEditableElement`: A function that will be called with an unmodifiable dom element every time that one is inserted.
-  This is used to style or change the element however you'd like to. Defaults to no-op.
+- `processContentEditableElement`: A function that will be called with each unmodifiable dom element in the rich text editor. This can be used
+  to set up click listeners, change the style, etc. The function will be called for unmodifiable elements in the initialHTML, calls to setHTML, and also for
+  every unmodifiable element that is inserted via `useContentEditableFalse()`. Defaults to a no-op function.
 
 ### Return value
 `useContentEditableFalse` returns an object with the following properties:
