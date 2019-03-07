@@ -5,12 +5,14 @@
 > &#8212; Anonymous
 
 ## Definition
-Pasting is when the user attempts to insert content into their rich text editor with Ctrl/Cmd + V.
+Pasting is when the user attempts to insert content into their rich text editor with Ctrl/Cmd + V
+or when code attempts to insert content via `document.execCommand('paste')`.
 
 [Read more on MDN](https://developer.mozilla.org/en-US/docs/Web/Events/paste)
 
 ## What this means for you
-Bandicoot currently allows any and all pasting from the user, regardless of the content of their clipboard.
+Bandicoot by default will allow for any and all pasting. If you wish to customize which pastes are allowed, you can 
+provide the [pasteFn prop](/components/rich-text-editor.md#props).
 
-If you'd like better control over what pastes are allowed or how to process the pasted content,
-please make your voice known in [this Github issue](https://github.com/CanopyTax/bandicoot/issues/1).
+Note that pasted html is vulnerable to [cross site scripting (XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting)
+and so your paste function should [sanitize the HTML](https://en.wikipedia.org/wiki/HTML_sanitization).
