@@ -565,7 +565,7 @@ consumed by RichTextEditor.</p>
         <span class="hljs-attr">save</span>=<span class="hljs-string">{save}</span>
         <span class="hljs-attr">unchangedInterval</span>=<span class="hljs-string">{3000}</span>
         <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;my-editor&quot;</span>
-      &gt;</span>
+      /&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">RichTextContainer</span>&gt;</span>
   )
 
@@ -603,6 +603,7 @@ The <code>save</code> function will be called with one argument, <code>html</cod
 <li><code>pasteFn</code> (optional): A function that will be called whenever the user pastes to the editor. The function will be called with a string of text and
   returns a string that will be pasted. If you wish to prevent a paste entirely, return <code>false</code> from the pasteFn. Note that pasted HTMl is vulnerable
   to cross site scripting. See <a href="../concepts/pasting.html">pasting docs</a> for more details.</li>
+<li><code>sanitizeHTML</code> (optional but HIGHLY RECOMMENDED): A function that will be called with an HTML string as a parameter just prior to that HTML being inserted into the DOM. This happens whether the HTML was provided in initialHTML or is a result of a paste event. Remember, Bandicoot relies on the consumer to prevent XSS.</li>
 </ul>
 <h3 id="ref">Ref</h3>
 <p>In addition to passing props, you can control the RichTextEditor imperatively with a <a href="https://reactjs.org/docs/glossary.html#refs" target="_blank">React ref</a>.
@@ -656,7 +657,7 @@ The ref has the following properties:</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"RichTextEditor","level":"3.1","depth":1,"next":{"title":"RichTextContainer","level":"3.2","depth":1,"path":"components/rich-text-container.md","ref":"components/rich-text-container.md","articles":[]},"previous":{"title":"Atomic Blocks","level":"2.7","depth":1,"path":"hooks/use-content-editable-false.md","ref":"hooks/use-content-editable-false.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","github","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/CanopyTax/bandicoot"},"ga":{"configuration":"auto","token":"UA-133316058-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"components/rich-text-editor.md","mtime":"2019-03-22T19:09:42.168Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-22T19:10:30.201Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"RichTextEditor","level":"3.1","depth":1,"next":{"title":"RichTextContainer","level":"3.2","depth":1,"path":"components/rich-text-container.md","ref":"components/rich-text-container.md","articles":[]},"previous":{"title":"Atomic Blocks","level":"2.7","depth":1,"path":"hooks/use-content-editable-false.md","ref":"hooks/use-content-editable-false.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","github","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/CanopyTax/bandicoot"},"ga":{"configuration":"auto","token":"UA-133316058-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"components/rich-text-editor.md","mtime":"2019-03-22T20:28:07.737Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-22T20:28:53.971Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
