@@ -29,8 +29,8 @@ function FontFamily() {
 }
 
 function Header() {
-  // activeValue is a boolean that indicates if the current line/selection is wrapped by h1
-  const {activeValue} = useDocumentQueryCommandState('formatBlock', 'h1')
+  // isActive is a boolean that indicates if the current line/selection is wrapped by h1
+  const {isActive} = useDocumentQueryCommandState('formatBlock', 'h1')
 
   return (
     <button className={isActive ? 'control-button-active' : ''}>
