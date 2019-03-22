@@ -23,7 +23,7 @@ function HeaderButton(props) {
       onClick={formatBlock(value)}
       className={isActive ? 'active-control-button' : ''}
     >
-      Bold
+      H1
     </button>
   )
 }
