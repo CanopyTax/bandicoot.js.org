@@ -7,7 +7,7 @@ import {RichTextContainer, RichTextEditor, useDocumentExecCommand, useFormatBloc
 function MyComponent() {
   return (
     <RichTextContainer>
-      <HeaderButton value='H1'/>
+      <HeaderButton value='h1'/>
       <RichTextEditor />
     </RichTextContainer>
   )
@@ -16,7 +16,7 @@ function MyComponent() {
 function HeaderButton(props) {
   const value = {props};
   const {formatBlock} = useFormatBlock()
-  const {isActive} = useDocumentQueryCommandState('formatBlock', 'h1')
+  const {isActive} = useDocumentQueryCommandState('formatBlock', value)
 
   return (
     <button
