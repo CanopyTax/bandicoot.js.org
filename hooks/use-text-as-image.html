@@ -581,7 +581,7 @@ text changes its font in any way, the image will not change.</p>
 <p>The <a href="../use-content-editable-false/README.md">useContentEditableFalse</a> hook provides an alternative way of doing the same thing.
 It also can handle inserting arbitrary html instead of just text strings.</p>
 <h2 id="api">API</h2>
-<pre><code class="lang-js"><span class="hljs-keyword">const</span> {insertTextAsImage} = useTextAsImage({processSerializedElement})
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> {insertTextAsImage} = useTextAsImage({processSerializedElement, fontFamily})
 </code></pre>
 <h3 id="arguments">Arguments</h3>
 <p><code>useTextAsImage</code> optionally accepts one argument - an options object with the following properties:</p>
@@ -589,6 +589,7 @@ It also can handle inserting arbitrary html instead of just text strings.</p>
 <li><code>processSerializedElement</code>: A function that will be called with each text-as-image dom element in the rich text editor. This can be used
 to set up click listeners, change the style, etc. The function will be called for the initialHTML, calls to setHTML, and also for
 every text-as-image element that is inserted via <code>useTextAsImage()</code>. Defaults to a no-op function.</li>
+<li><code>fontFamily</code> (optional): A string declaring the desired font for the text</li>
 </ul>
 <h3 id="return-value">Return value</h3>
 <p><code>useTextAsImage</code> returns an object with the following properties:</p>
@@ -643,7 +644,7 @@ with a string <code>text</code>.</li>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"useTextAsImage","level":"4.7","depth":1,"next":{"title":"useElementDeletionDetection","level":"4.8","depth":1,"path":"hooks/use-element-deletion-detection.md","ref":"hooks/use-element-deletion-detection.md","articles":[]},"previous":{"title":"useContentEditableFalse","level":"4.6","depth":1,"path":"hooks/use-content-editable-false.md","ref":"hooks/use-content-editable-false.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","github","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/CanopyTax/bandicoot"},"ga":{"configuration":"auto","token":"UA-133316058-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"hooks/use-text-as-image.md","mtime":"2019-03-22T18:41:39.174Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-22T18:42:29.064Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"useTextAsImage","level":"4.7","depth":1,"next":{"title":"useElementDeletionDetection","level":"4.8","depth":1,"path":"hooks/use-element-deletion-detection.md","ref":"hooks/use-element-deletion-detection.md","articles":[]},"previous":{"title":"useContentEditableFalse","level":"4.6","depth":1,"path":"hooks/use-content-editable-false.md","ref":"hooks/use-content-editable-false.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","github","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/CanopyTax/bandicoot"},"ga":{"configuration":"auto","token":"UA-133316058-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"hooks/use-text-as-image.md","mtime":"2019-03-22T19:09:42.168Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-22T19:10:30.201Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
