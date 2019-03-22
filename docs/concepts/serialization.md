@@ -30,5 +30,4 @@ that javascript will be executed during deserialization. This is a security risk
 
 Cross site scripting is something you need to avoid in your code. To do so, the HTML string needs to be
 [sanitized](https://en.wikipedia.org/wiki/HTML_sanitization). Bandicoot does not currently automatically sanitize your HTML
-before using dangerouslySetInnerHTML. If you'd like to see that change, please open an issue. Because of this, your code will need
-to do html sanitization itself. The [sanitize-html](https://github.com/punkave/sanitize-html) library is one option for doing so.
+before using dangerouslySetInnerHTML. However, [RichTextEditor](/components/rich-text-editor.md) does accept a prop `sanitizeHTML` that will be invoked on any HTML that is inserted into the DOM. Please use a library like [sanitize-html](https://github.com/punkave/sanitize-html) in the creation of the sanitization function you provide `sanitizeHTML`.
