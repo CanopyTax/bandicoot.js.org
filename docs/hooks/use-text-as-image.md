@@ -81,7 +81,7 @@ const {insertTextAsImage} = useTextAsImage({processSerializedElement, fontFamily
 - `processSerializedElement`: A function that will be called with each text-as-image dom element in the rich text editor. This can be used
   to set up click listeners, change the style, etc. The function will be called for the initialHTML, calls to setHTML, and also for
   every text-as-image element that is inserted via `useTextAsImage()`. Defaults to a no-op function.
-- `fontFamily`: A string declaring the desired font for the text
+- `fontFamily` (optional): A string declaring the desired font for the text
 
 ### Return value
 `useTextAsImage` returns an object with the following properties:
