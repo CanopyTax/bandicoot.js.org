@@ -44,7 +44,7 @@ import {useTextAsImage} from 'bandicoot'
 
 function AtomicElement() {
   const [unmodifiableText, setUnmodifiableText] = useState('')
-  const {insertTextAsImage} = useTextAsImage({processSerializedElement, fontFamily: 'Arial'})
+  const {insertTextAsImage} = useTextAsImage({processSerializedElement})
 
   return (
     <>
@@ -73,7 +73,7 @@ It also can handle inserting arbitrary html instead of just text strings.
 
 ## API
 ```js
-const {insertTextAsImage} = useTextAsImage({processSerializedElement, fontFamily: 'Courier New'})
+const {insertTextAsImage} = useTextAsImage({processSerializedElement, fontFamily})
 ```
 
 ### Arguments
