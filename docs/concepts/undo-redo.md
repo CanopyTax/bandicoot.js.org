@@ -44,7 +44,8 @@ If you want your dom actions to be "undoable" and "redoable", you must make your
 [document.execCommand](/hooks/use-document-exec-command.md), [selection](/concepts/selection.md), and [range](/concepts/range.md).
 
 For example, to delete dom nodes and text in an "undoable" way, you must highlight the text programatically and then delete it
-with execCommand. Doing `element.remove()` will not result in the operation being "undoable".
+with execCommand. Doing `element.remove()` will not result in the operation being "undoable". Additionally, modifying a selection
+and range programatically instead of using `document.execCommand` to modify it will result in the operation not being "undoable."
 
 ```js
 function undoableDelete(element) {

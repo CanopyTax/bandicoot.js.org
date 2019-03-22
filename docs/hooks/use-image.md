@@ -67,9 +67,9 @@ const {chooseFile, removeImage} = useImage({processImgElement, fileBlobToUrl})
 ### Arguments
 `useImage` can be called with no arguments (to use the defaults) or with a single object argument with the following properties:
 
-- `processImgElement` (optional): A function that will be called whenever an img element is inserted into the rich text editor. The `processImgElement`
-  will be called with one argument, the `imgElement`, which is the DOM `<img>` element that has just been inserted. You can then do what
-  you want with it, including setting up click listeners, changing the styling, etc. Defaults to no-op.
+- `processImgElement` (optional): A function that will be called with each `<img>` dom element in the rich text editor. This can be used
+  to set up click listeners, change the style, etc. The function will be called for img elements in the initialHTML, calls to setHTML, and also for
+  every img element that is inserted via `useImage()`. Defaults to a no-op function.
 - `fileBlobToUrl` (optional): A function that will be called whenever the user has picked a file from their computer to insert into the rich text
   editor. The `fileBlobToUrl` function will be called with one argument, a [`File`](https://developer.mozilla.org/en-US/docs/Web/API/File).
   The return value of `fileBlobToUrl` must be a promise that resolves with a string url for that FileBlog object. This is useful for uploading a

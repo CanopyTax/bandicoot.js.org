@@ -36,3 +36,4 @@
 * [Range](concepts/range.md)
 * [Undo / Redo](concepts/undo-redo.md)
 * [Pasting](concepts/pasting.md)
+* [Serialization](concepts/serialization.md)

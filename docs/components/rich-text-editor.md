@@ -83,6 +83,9 @@ function MyEditor() {
 - `className` (optional): A string className that will be applied to the [content editable](/concepts/content-editable.md) element.
 - `placeholder` (optional): A string placeholder that will be shown when the rich text editor is empty.
 - `placeholderColor` (optional): A string css color for the placeholderText. Defaults to `#CFCFCF`.
+- `pasteFn` (optional): A function that will be called whenever the user pastes to the editor. The function will be called with a string of text and
+    returns a string that will be pasted. If you wish to prevent a paste entirely, return `false` from the pasteFn. Note that pasted HTMl is vulnerable
+    to cross site scripting. See [pasting docs](/concepts/pasting.md) for more details.
 
 ### Ref
 In addition to passing props, you can control the RichTextEditor imperatively with a [React ref](https://reactjs.org/docs/glossary.html#refs).
@@ -90,3 +93,4 @@ The ref has the following properties:
 - `setHTML(html)`: A function that will forcibly set the editor to have the new `html` string as its value.
 - `getHTML()`: A function that returns serialized HTML as a string. The `html` returned is the same as what is given to the `props.save` function.
 - `resetEditor()`: A function that you can call to empty out the editor. This is equivalent to calling `editorRef.current.setHTML('')`.
+- `focus()`: A function that you can call to forcibly focus the editor.
