@@ -15,4 +15,4 @@ Bandicoot by default will allow for any and all pasting. If you wish to customiz
 provide the [pasteFn prop](/components/rich-text-editor.md#props).
 
 Note that pasted html is vulnerable to [cross site scripting (XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting)
-and so you should also provide the `sanitizeHTML` to prop `RichTextEditor` to [sanitize the HTML](https://en.wikipedia.org/wiki/HTML_sanitization).
+and so you should also provide the `sanitizeHTML` prop to `RichTextEditor` to [sanitize the HTML](https://en.wikipedia.org/wiki/HTML_sanitization).
