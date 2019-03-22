@@ -27,6 +27,17 @@ function FontFamily() {
     <div>The currently selected text is using font family {activeValue}</div>
   )
 }
+
+function Header() {
+  // activeValue is a boolean that indicates if the current line/selection is wrapped by h1
+  const {activeValue} = useDocumentQueryCommandState('formatBlock', 'h1')
+
+  return (
+    <button className={isActive ? 'control-button-active' : ''}>
+      H1
+    </button>
+  )
+}
 ```
 
 ## API
@@ -36,6 +47,7 @@ const {isActive, activeValue} = useDocumentQueryCommandState(commandName)
 
 ### Arguments
 - `commandName` (required): The [document command](https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand#Commands) that you want to check the status of.
+- `value` (optional): In some cases we want to check if `document.queryCommandValue` matches some expectation. A situation in which this might be the case is in the use of `formatBlock` with [headers](/walkthrough/headers.md). Here it is not whether or not bold is currently active in the selection but whether or not the `formatBlock` is indeed `h1`.
 
 ### Return value
 An object with the following properties:
