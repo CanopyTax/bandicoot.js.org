@@ -47,12 +47,8 @@ Since the value provided by RichTextContext is exported from bandicoot, it is co
 Changes to RichTextContext will follow semantic versioning rules.
 
 The value provided is an object with the following properties:
-- `addSelectionChangedListener(listener)`: A function that must be given a listener function as an argument. The `listener` will be called
-  whenever the selection changes **within the rich text editor**. Selection changes outside of the rich text editor will be ignored.
-- `removeSelectionChangedListener(listener)`: A function that must be given a listener function as an argument. The `listener` will be removed
-  so that it is no longer called when the selection changes.
-- `fireSelectionChanged()`: A function that is called by RichTextEditor to notify all listeners of a selection change within the editor. This
-  function should probably only be called by RichTextEditor, not by custom hooks or user logic.
+
+### Blur
 - `selectRangeFromBeforeBlur()`: A function that you should call when you want to ensure that the rich text editor is focused and contains
   the current [selection](/concepts/selection.md). If a blur event has occurred and the rich text editor is no longer focused, this will
   select the text that was selected before the blur.
@@ -62,18 +58,29 @@ The value provided is an object with the following properties:
   it is no longer called when blur events occur.
 - `fireBlur()`: A function that is called by RichTextEditor to notify all listeners that the [content editable](/concepts/content-editable.md)
   element has blurred. This function should probably not be called by any code except the RichTextEditor.
+- `isFocused()`: A function that can be called to learn if the rich text editor is currently focused or not. Returns a boolean.
+
+### HTML
+
 - `addNewHTMLListener(listener)`: A function that must be given a listener function as an argument. The `listener` will be called with no
   arguments whenever the rich text editor is forcibly updated to have new HTML content (via `editorRef.current.setHTML()`). To access the
   new HTML, use `richTextContext.getContentEditableElement().querySelector('.thing-im-interested-in')`. This is how you can control
   deserialization, and it is often used in conjunction with `addSerializer`.
 - `removeNewHTMLListener(listener)`: A function that must be given a listener function as an argument. The `listener` will be removed
   and no longer called when there is no HTML.
-- `fireNewHTML()`: A function that is called by RichTextEditor to notify all listeners that new html has been forcibly set for the editor.
-  This function should probably not be called by any code except for the RichTextEditor itself.
-- `isFocused()`: A function that can be called to learn if the rich text editor is currently focused or not. Returns a boolean.
+- `fireNewHTML()`: A function that is called by RichTextEditor to notify all listeners that new html has been forcibly set for the editor. This function should probably not be called by any code except for the RichTextEditor itself.
 - `getContentEditableElement()`: A function that will return the content editable dom element that was rendered by RichTextEditor.
   Be careful with this one -- it is needed to implement things but also gives you access to the entire rich text dom which means that
   you could break not only your own componet/hook, but also other components and hooks.
+
+### Selection change listeners
+- `addSelectionChangedListener(listener)`: A function that must be given a listener function as an argument. The `listener` will be called
+  whenever the selection changes **within the rich text editor**. Selection changes outside of the rich text editor will be ignored.
+- `removeSelectionChangedListener(listener)`: A function that must be given a listener function as an argument. The `listener` will be removed
+  so that it is no longer called when the selection changes.
+- `fireSelectionChanged()`: A function that is called by RichTextEditor to notify all listeners of a selection change within the editor. This function should probably only be called by RichTextEditor, not by custom hooks or user logic.
+
+### Serializers
 - `addSerializer(serializer)`: A function that must be given a serializer function as an argument. A serializer is a function that will be called
   with a DOM element right before the dom is turned into an HTML string. The serializer should modify the dom element however it would like to
   in preparation for the rich text html to be saved. This is often used in conjunction with `addNewHTMLListener`, which allows you to control
