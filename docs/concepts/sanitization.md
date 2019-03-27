@@ -20,7 +20,7 @@ that javascript will be executed during deserialization. This is a security risk
 ### Sanitization
 Since Bandicoot does **NOT** automatically sanitize incoming or outgoing HTML, it is up to you as the developer to make sure that sanitization happens. However, Bandicoot does expose a [sanitizeHTML prop](/components/rich-text-editor.md#props) on the [RichTextEditor component](/components/rich-text-editor.md) which allows you to provide a sanitization function.
 
-If a sanitization function is provided through the `sanitizeHTML` prop, Bandicoot will pass incoming HTML strings through this function before inserting the content into the DOM (see [note 1](/concepts/sanitization.md#notes)). If provided, Bandicoot will also pass outgoing HTML through the `sanitizeHTML` function after serialization (see [note 2](/concepts/sanitization.md#notes)). If a `sanitizeHTML` function is *NOT* provided, Bandicoot will simply pass through the *unsanitized* HTML string. In the case of inserting the content into the DOM this would mean using `dangerouslySetInnerHTML` with unsanitized HTML - **NOT RECOMMENDED**!.
+If a sanitization function is provided through the `sanitizeHTML` prop, Bandicoot will pass incoming HTML strings through this function before inserting the content into the DOM (see [note 1](/concepts/sanitization.md#notes)). If provided, Bandicoot will also pass outgoing HTML through the `sanitizeHTML` function after serialization (see [note 2](/concepts/sanitization.md#notes)). If a `sanitizeHTML` function is *NOT* provided, Bandicoot will simply pass through the *unsanitized* HTML string. In the case of inserting the content into the DOM this would mean using `dangerouslySetInnerHTML` with unsanitized HTML - **NOT RECOMMENDED**!
 
 Ultimately, the choice on what sanitization process to take or what library to use is up to you. If you are looking to do client-side sanitization, there are many [third-party HTML sanitizers](https://www.npmjs.com/search?q=html+sanitizer) that already exist.
 
@@ -40,9 +40,17 @@ Bandicoot expects your `sanitizeHTML` function to return the sanitized HTML stri
 
 ### Example
 ```js
-<RichTextEditor
-  sanitizeHTML={myOwnSanitizeHtmlFunction}
-/>
+import {RichTextEditor, RichTextContainer} from 'bandicoot'
+
+function MyEditor() {
+  return (
+    <RichTextContainer>
+      <RichTextEditor
+        sanitizeHTML={myOwnSanitizeHtmlFunction}
+      />
+    </RichTextContainer>
+  )
+}
 
 function myOwnSanitizeHtmlFunction(suspectHTML, actionType) {
   // Implement your logic to sanitize 'suspectHTML' into 'sanitizedHTML'.
