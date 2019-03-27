@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Undo / Redo · GitBook</title>
+        <title>Sanitization · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="pasting.html" />
     
-    
-    <link rel="prev" href="range.html" />
+    <link rel="prev" href="serialization.html" />
     
 
     </head>
@@ -436,7 +434,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="6.6" data-path="undo-redo.html">
+        <li class="chapter " data-level="6.6" data-path="undo-redo.html">
             
                 <a href="undo-redo.html">
             
@@ -475,7 +473,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.9" data-path="sanitization.html">
+        <li class="chapter active" data-level="6.9" data-path="sanitization.html">
             
                 <a href="sanitization.html">
             
@@ -518,7 +516,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Undo / Redo</a>
+        <a href=".." >Sanitization</a>
     </h1>
 </div>
 
@@ -533,62 +531,54 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="undo--redo">Undo / Redo</h1>
+                                <h1 id="sanitization">Sanitization</h1>
 <blockquote>
-<p>asdf...as...asdf</p>
+<p>I wish it were Santa-ization.  Who wouldn&apos;t like that?</p>
 <p>&#x2014; Anonymous</p>
 </blockquote>
 <h2 id="definition">Definition</h2>
-<p>Undo and Redo are operations a user performs through keyboard shortcuts or button clicks.</p>
-<p>In bandicoot editors, a user can always undo or redo their previous actions with the keyboard shortcuts Ctrl/Cmd + Z (undo)
-or Ctrl/Cmd + Y (redo).</p>
-<h2 id="example">Example</h2>
-<p>To undo or redo the last action programmatically, use the <a href="../hooks/use-document-exec-command.html">useDocumentExecCommand</a> hook:</p>
-<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> {useDocumentExecCommand} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;bandicoot&apos;</span>
+<p><a href="https://en.wikipedia.org/wiki/HTML_sanitization" target="_blank">Sanitization</a> within the context of Bandicoot refers to cleaning an HTML string to remove potentially malicious content. Unsanitized HTML is vulnerable to <a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank">cross site scripting (XSS)</a> which is something you need to avoid in your code. Bandicoot does <strong>NOT</strong> automatically sanitize your HTML, however it provides a way for you to bring your own sanitizing function to the party.</p>
+<h2 id="why-you-should-care">Why you should care</h2>
+<p>After receiving incoming HTML, Bandicoot inserts the content into the DOM via React&apos;s <a href="https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml" target="_blank">dangerouslySetInnerHTML</a>.
+React calls it dangerous for good reason -- if the HTML string has a <code>&lt;script&gt;</code> element or other javascript embedded into the dom elements,
+that javascript will be executed during deserialization. This is a security risk known as
+<a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank">cross site scripting (XSS)</a>.</p>
+<h2 id="what-this-means-for-you">What this means for you</h2>
+<h3 id="sanitization">Sanitization</h3>
+<p>Since Bandicoot does <strong>NOT</strong> automatically sanitize incoming or outgoing HTML, it is up to you as the developer to make sure that sanitization happens. However, Bandicoot does expose a <a href="../components/rich-text-editor.html#props">sanitizeHTML prop</a> on the <a href="../components/rich-text-editor.html">RichTextEditor component</a> which allows you to provide a sanitization function.</p>
+<p>If a sanitization function is provided through the <code>sanitizeHTML</code> prop, Bandicoot will pass incoming HTML strings through this function before inserting the content into the DOM (see <a href="sanitization.html#notes">note 1</a>). If provided, Bandicoot will also pass outgoing HTML through the <code>sanitizeHTML</code> function after serialization (see <a href="sanitization.html#notes">note 2</a>). If a <code>sanitizeHTML</code> function is <em>NOT</em> provided, Bandicoot will simply pass through the <em>unsanitized</em> HTML string. In the case of inserting the content into the DOM this would mean using <code>dangerouslySetInnerHTML</code> with unsanitized HTML - <strong>NOT RECOMMENDED</strong>!.</p>
+<p>Ultimately, the choice on what sanitization process to take or what library to use is up to you. If you are looking to do client-side sanitization, there are many <a href="https://www.npmjs.com/search?q=html+sanitizer" target="_blank">third-party HTML sanitizers</a> that already exist.</p>
+<h3 id="the-sanitizehtml-function">The <code>sanitizeHTML</code> function</h3>
+<p>When Bandicoot calls the <code>sanitizeHTML</code> function it passes two arguments:</p>
+<ol>
+<li><code>suspectHTML</code>: An string of HTML content that potentially needs sanitizing.</li>
+<li><code>actionType</code>: A string indicating what action Bandicoot is about to take.</li>
+</ol>
+<p>The <code>actionType</code> options and when they occur are as follows:</p>
+<ul>
+<li><code>setHTML</code>: Occurs right before inserting the <code>initialHTML</code> into the DOM as well as right before inserting content into the DOM through the <code>editorRef.current.setHTML()</code> and <code>editorRef.current.resetEditor()</code> functions.</li>
+<li><code>pasteHTML</code>: Occurs right before passing a paste operation&apos;s content to the <a href="../components/rich-text-editor.html#props">pasteFn prop</a>.  Note that the returned HTML string from the <code>pasteFn</code> function is immediately inserted into the DOM without further sanitization.</li>
+<li><code>insertContentEditableFalseHTML</code>: Occurs right before inserting content into the DOM using the <code>useContentEditableFalse</code> hook&apos;s <code>insertContentEditableFalseElement</code> function.</li>
+<li><code>getHTML</code>: Occurs post serialization, right before returning content through the <code>save()</code> or <code>editorRef.current.getHTML()</code> functions.</li>
+<li><code>initialSetLastSavedHTML</code>: Occurs right before initially setting the RichTextEditor&apos;s internal lastSavedHTML state variable.</li>
+</ul>
+<p>Bandicoot expects your <code>sanitizeHTML</code> function to return the sanitized HTML string.</p>
+<h3 id="example">Example</h3>
+<pre><code class="lang-js">&lt;RichTextEditor
+  sanitizeHTML={myOwnSanitizeHtmlFunction}
+/&gt;
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">UndoButton</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">const</span> {performCommand} = useDocumentExecCommand(<span class="hljs-string">&apos;undo&apos;</span>)
-
-  <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{performCommand}</span>&gt;</span>
-      Undo
-    <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
-  )
-}
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">UndoButton</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">const</span> {performCommand} = useDocumentExecCommand(<span class="hljs-string">&apos;redo&apos;</span>)
-
-  <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{performCommand}</span>&gt;</span>
-      Redo
-    <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
-  )
-}
-</code></pre>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand#Commands" target="_blank">Read MDN docs for more detail</a></p>
-<h2 id="caviats--notes">Caviats / Notes</h2>
-<p>If you want your dom actions to be &quot;undoable&quot; and &quot;redoable&quot;, you must make your modifications with
-<a href="../hooks/use-document-exec-command.html">document.execCommand</a>, <a href="selection.html">selection</a>, and <a href="range.html">range</a>.</p>
-<p>For example, to delete dom nodes and text in an &quot;undoable&quot; way, you must highlight the text programatically and then delete it
-with execCommand. Doing <code>element.remove()</code> will not result in the operation being &quot;undoable&quot;. Additionally, modifying a selection
-and range programatically instead of using <code>document.execCommand</code> to modify it will result in the operation not being &quot;undoable.&quot;</p>
-<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">undoableDelete</span>(<span class="hljs-params">element</span>) </span>{
-  <span class="hljs-comment">// The newRange will highlight the entire element</span>
-  <span class="hljs-keyword">const</span> newRange = <span class="hljs-built_in">document</span>.createRange()
-  newRange.selectNode(element)
-
-  <span class="hljs-comment">// Make that range the active one</span>
-  <span class="hljs-keyword">const</span> selection = <span class="hljs-built_in">window</span>.getSelection()
-  selection.removeAllRanges()
-  selection.addRange(newRange)
-
-  <span class="hljs-comment">// Now delete the the highlighted text with execCommand</span>
-  <span class="hljs-built_in">document</span>.execCommand(<span class="hljs-string">&apos;delete&apos;</span>)
-
-  <span class="hljs-comment">// Now undo/redo will include this operation!</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">myOwnSanitizeHtmlFunction</span>(<span class="hljs-params">suspectHTML, actionType</span>) </span>{
+  <span class="hljs-comment">// Implement your logic to sanitize &apos;suspectHTML&apos; into &apos;sanitizedHTML&apos;.</span>
+  <span class="hljs-comment">// If desired, key off of the &apos;actionType&apos; string.  For example:</span>
+  <span class="hljs-comment">// - if &apos;pasteHTML&apos;, sanitize using rules X, Y, and Z.</span>
+  <span class="hljs-comment">// - else, sanitize using just rules X and Y.</span>
+  <span class="hljs-keyword">return</span> sanitizedHTML;
 }
 </code></pre>
+<h2 id="notes">Notes</h2>
+<p>1) If you use Bandicoot&apos;s <code>richTextContext.getContentEditableElement()</code> to interact with the HTML directly, be aware that the content does not pass through the <code>sanitizeHTML</code> function since you are accessing the DOM directly.</p>
+<p>2) Content being sent to a server from a client should never be considered sanitized since a bad actor could tamper with client-side code or bypass sanitization completely by sending malicious data directly to a server&apos;s endpoints. Server-side incoming sanitization should be the primary line of defense instead of client-side outgoing sanitization.</p>
 
                                 
                                 </section>
@@ -616,14 +606,10 @@ and range programatically instead of using <code>document.execCommand</code> to 
 
             
                 
-                <a href="range.html" class="navigation navigation-prev " aria-label="Previous page: Range">
+                <a href="serialization.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Serialization">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="pasting.html" class="navigation navigation-next " aria-label="Next page: Pasting">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -632,7 +618,7 @@ and range programatically instead of using <code>document.execCommand</code> to 
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Undo / Redo","level":"6.6","depth":1,"next":{"title":"Pasting","level":"6.7","depth":1,"path":"concepts/pasting.md","ref":"concepts/pasting.md","articles":[]},"previous":{"title":"Range","level":"6.5","depth":1,"path":"concepts/range.md","ref":"concepts/range.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","github","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/CanopyTax/bandicoot"},"ga":{"configuration":"auto","token":"UA-133316058-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"concepts/undo-redo.md","mtime":"2019-03-27T21:06:37.581Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-27T21:07:24.980Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Sanitization","level":"6.9","depth":1,"previous":{"title":"Serialization","level":"6.8","depth":1,"path":"concepts/serialization.md","ref":"concepts/serialization.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","github","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/CanopyTax/bandicoot"},"ga":{"configuration":"auto","token":"UA-133316058-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"concepts/sanitization.md","mtime":"2019-03-27T21:06:37.581Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-27T21:07:24.980Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -57,6 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="sanitization.html" />
+    
     
     <link rel="prev" href="pasting.html" />
     
@@ -473,6 +475,19 @@
             
         </li>
     
+        <li class="chapter " data-level="6.9" data-path="sanitization.html">
+            
+                <a href="sanitization.html">
+            
+                    
+                    Sanitization
+            
+                </a>
+            
+
+            
+        </li>
+    
 
     
 
@@ -536,13 +551,7 @@ are html-to-markdown libraries on NPM that can be used in conjunction with bandi
 customized with <a href="../context/rich-text-context.html"><code>richTextContext.addSerializer()</code></a>. Serialized html strings are then given as an argument
 to RichTextEditor&apos;s <code>save()</code> prop.</p>
 <h3 id="deserialization">Deserialization</h3>
-<p>Bandicoot accomplishes deserialization via React&apos;s <a href="https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml" target="_blank">dangerouslySetInnerHTML</a>.
-React calls it dangerous for good reason -- if the HTML string has a <code>&lt;script&gt;</code> element or other javascript embedded into the dom elements,
-that javascript will be executed during deserialization. This is a security risk known as
-<a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank">cross site scripting (XSS)</a>.</p>
-<p>Cross site scripting is something you need to avoid in your code. To do so, the HTML string needs to be
-<a href="https://en.wikipedia.org/wiki/HTML_sanitization" target="_blank">sanitized</a>. Bandicoot does not currently automatically sanitize your HTML
-before using dangerouslySetInnerHTML. However, <a href="../components/rich-text-editor.html">RichTextEditor</a> does accept a prop <code>sanitizeHTML</code> that will be invoked on any HTML that is inserted into the DOM. Please use a library like <a href="https://github.com/punkave/sanitize-html" target="_blank">sanitize-html</a> in the creation of the sanitization function you provide <code>sanitizeHTML</code>.</p>
+<p>Bandicoot accomplishes deserialization via React&apos;s <a href="https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml" target="_blank">dangerouslySetInnerHTML</a>. For this reason, it is <strong>HIGHLY RECOMMENDED</strong> that you review the <a href="sanitization.html">sanitization docs</a> to learn more about what you need to do to avoid security vulnerabilities.</p>
 
                                 
                                 </section>
@@ -570,10 +579,14 @@ before using dangerouslySetInnerHTML. However, <a href="../components/rich-text-
 
             
                 
-                <a href="pasting.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Pasting">
+                <a href="pasting.html" class="navigation navigation-prev " aria-label="Previous page: Pasting">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="sanitization.html" class="navigation navigation-next " aria-label="Next page: Sanitization">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -582,7 +595,7 @@ before using dangerouslySetInnerHTML. However, <a href="../components/rich-text-
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Serialization","level":"6.8","depth":1,"previous":{"title":"Pasting","level":"6.7","depth":1,"path":"concepts/pasting.md","ref":"concepts/pasting.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","github","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/CanopyTax/bandicoot"},"ga":{"configuration":"auto","token":"UA-133316058-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"concepts/serialization.md","mtime":"2019-03-22T20:28:07.737Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-22T20:28:53.971Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Serialization","level":"6.8","depth":1,"next":{"title":"Sanitization","level":"6.9","depth":1,"path":"concepts/sanitization.md","ref":"concepts/sanitization.md","articles":[]},"previous":{"title":"Pasting","level":"6.7","depth":1,"path":"concepts/pasting.md","ref":"concepts/pasting.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","github","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/CanopyTax/bandicoot"},"ga":{"configuration":"auto","token":"UA-133316058-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"concepts/serialization.md","mtime":"2019-03-27T21:06:37.581Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-27T21:07:24.980Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

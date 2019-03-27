@@ -475,6 +475,19 @@
             
         </li>
     
+        <li class="chapter " data-level="6.9" data-path="../concepts/sanitization.html">
+            
+                <a href="../concepts/sanitization.html">
+            
+                    
+                    Sanitization
+            
+                </a>
+            
+
+            
+        </li>
+    
 
     
 
@@ -560,13 +573,8 @@ where we can discuss adding a new hook to bandicoot. That way, everyone will ben
 <p>Since the value provided by RichTextContext is exported from bandicoot, it is considered part of bandicoot&apos;s public API.
 Changes to RichTextContext will follow semantic versioning rules.</p>
 <p>The value provided is an object with the following properties:</p>
+<h3 id="blur">Blur</h3>
 <ul>
-<li><code>addSelectionChangedListener(listener)</code>: A function that must be given a listener function as an argument. The <code>listener</code> will be called
-whenever the selection changes <strong>within the rich text editor</strong>. Selection changes outside of the rich text editor will be ignored.</li>
-<li><code>removeSelectionChangedListener(listener)</code>: A function that must be given a listener function as an argument. The <code>listener</code> will be removed
-so that it is no longer called when the selection changes.</li>
-<li><code>fireSelectionChanged()</code>: A function that is called by RichTextEditor to notify all listeners of a selection change within the editor. This
-function should probably only be called by RichTextEditor, not by custom hooks or user logic.</li>
 <li><code>selectRangeFromBeforeBlur()</code>: A function that you should call when you want to ensure that the rich text editor is focused and contains
 the current <a href="../concepts/selection.html">selection</a>. If a blur event has occurred and the rich text editor is no longer focused, this will
 select the text that was selected before the blur.</li>
@@ -576,18 +584,31 @@ the rich text editor&apos;s <a href="../concepts/content-editable.html">content 
 it is no longer called when blur events occur.</li>
 <li><code>fireBlur()</code>: A function that is called by RichTextEditor to notify all listeners that the <a href="../concepts/content-editable.html">content editable</a>
 element has blurred. This function should probably not be called by any code except the RichTextEditor.</li>
+<li><code>isFocused()</code>: A function that can be called to learn if the rich text editor is currently focused or not. Returns a boolean.</li>
+</ul>
+<h3 id="html">HTML</h3>
+<ul>
 <li><code>addNewHTMLListener(listener)</code>: A function that must be given a listener function as an argument. The <code>listener</code> will be called with no
 arguments whenever the rich text editor is forcibly updated to have new HTML content (via <code>editorRef.current.setHTML()</code>). To access the
 new HTML, use <code>richTextContext.getContentEditableElement().querySelector(&apos;.thing-im-interested-in&apos;)</code>. This is how you can control
 deserialization, and it is often used in conjunction with <code>addSerializer</code>.</li>
 <li><code>removeNewHTMLListener(listener)</code>: A function that must be given a listener function as an argument. The <code>listener</code> will be removed
 and no longer called when there is no HTML.</li>
-<li><code>fireNewHTML()</code>: A function that is called by RichTextEditor to notify all listeners that new html has been forcibly set for the editor.
-This function should probably not be called by any code except for the RichTextEditor itself.</li>
-<li><code>isFocused()</code>: A function that can be called to learn if the rich text editor is currently focused or not. Returns a boolean.</li>
+<li><code>fireNewHTML()</code>: A function that is called by RichTextEditor to notify all listeners that new html has been forcibly set for the editor. This function should probably not be called by any code except for the RichTextEditor itself.</li>
 <li><code>getContentEditableElement()</code>: A function that will return the content editable dom element that was rendered by RichTextEditor.
 Be careful with this one -- it is needed to implement things but also gives you access to the entire rich text dom which means that
 you could break not only your own componet/hook, but also other components and hooks.</li>
+</ul>
+<h3 id="selection-change-listeners">Selection change listeners</h3>
+<ul>
+<li><code>addSelectionChangedListener(listener)</code>: A function that must be given a listener function as an argument. The <code>listener</code> will be called
+whenever the selection changes <strong>within the rich text editor</strong>. Selection changes outside of the rich text editor will be ignored.</li>
+<li><code>removeSelectionChangedListener(listener)</code>: A function that must be given a listener function as an argument. The <code>listener</code> will be removed
+so that it is no longer called when the selection changes.</li>
+<li><code>fireSelectionChanged()</code>: A function that is called by RichTextEditor to notify all listeners of a selection change within the editor. This function should probably only be called by RichTextEditor, not by custom hooks or user logic.</li>
+</ul>
+<h3 id="serializers">Serializers</h3>
+<ul>
 <li><code>addSerializer(serializer)</code>: A function that must be given a serializer function as an argument. A serializer is a function that will be called
 with a DOM element right before the dom is turned into an HTML string. The serializer should modify the dom element however it would like to
 in preparation for the rich text html to be saved. This is often used in conjunction with <code>addNewHTMLListener</code>, which allows you to control
@@ -642,7 +663,7 @@ element that has been modified. The only code that should call this function is 
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"RichTextContext","level":"5.1","depth":1,"next":{"title":"Control Button","level":"6.1","depth":1,"path":"concepts/control-button.md","ref":"concepts/control-button.md","articles":[]},"previous":{"title":"useElementDeletionDetection","level":"4.8","depth":1,"path":"hooks/use-element-deletion-detection.md","ref":"hooks/use-element-deletion-detection.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","github","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/CanopyTax/bandicoot"},"ga":{"configuration":"auto","token":"UA-133316058-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"context/rich-text-context.md","mtime":"2019-03-22T20:28:07.737Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-22T20:28:53.971Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"RichTextContext","level":"5.1","depth":1,"next":{"title":"Control Button","level":"6.1","depth":1,"path":"concepts/control-button.md","ref":"concepts/control-button.md","articles":[]},"previous":{"title":"useElementDeletionDetection","level":"4.8","depth":1,"path":"hooks/use-element-deletion-detection.md","ref":"hooks/use-element-deletion-detection.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","github","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/CanopyTax/bandicoot"},"ga":{"configuration":"auto","token":"UA-133316058-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"context/rich-text-context.md","mtime":"2019-03-27T21:06:37.581Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-27T21:07:24.980Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
