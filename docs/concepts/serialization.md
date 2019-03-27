@@ -23,11 +23,4 @@ customized with [`richTextContext.addSerializer()`](/context/rich-text-context.m
 to RichTextEditor's `save()` prop.
 
 ### Deserialization
-Bandicoot accomplishes deserialization via React's [dangerouslySetInnerHTML](https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml).
-React calls it dangerous for good reason -- if the HTML string has a `<script>` element or other javascript embedded into the dom elements,
-that javascript will be executed during deserialization. This is a security risk known as
-[cross site scripting (XSS)](https://en.wikipedia.org/wiki/Cross-site_scripting).
-
-Cross site scripting is something you need to avoid in your code. To do so, the HTML string needs to be
-[sanitized](https://en.wikipedia.org/wiki/HTML_sanitization). Bandicoot does not currently automatically sanitize your HTML
-before using dangerouslySetInnerHTML. However, [RichTextEditor](/components/rich-text-editor.md) does accept a prop `sanitizeHTML` that will be invoked on any HTML that is inserted into the DOM. Please use a library like [sanitize-html](https://github.com/punkave/sanitize-html) in the creation of the sanitization function you provide `sanitizeHTML`.
+Bandicoot accomplishes deserialization via React's [dangerouslySetInnerHTML](https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml). For this reason, it is **HIGHLY RECOMMENDED** that you review the [sanitization docs](/concepts/sanitization.md) to learn more about what you need to do to avoid security vulnerabilities.
