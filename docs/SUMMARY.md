@@ -37,3 +37,4 @@
 * [Undo / Redo](concepts/undo-redo.md)
 * [Pasting](concepts/pasting.md)
 * [Serialization](concepts/serialization.md)
+* [Sanitization](concepts/sanitization.md)
