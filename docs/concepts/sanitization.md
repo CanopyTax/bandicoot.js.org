@@ -27,14 +27,14 @@ When Bandicoot calls the `sanitizeHTML` function it passes two arguments:
 1. `suspectHTML`: An string of html content that potentially needs sanitizing.
 2. `actionType`: A string indicating what action Bandicoot is about to take.
 
-Bandicoot expects your `sanitizeHTML` function to return the sanitized html string.
-
 The `actionType` options and when they occur are as follows:
 - `setHTML`: Occurs right before inserting the `initialHTML` into the DOM as well as right before inserting content into the DOM through the `editorRef.current.setHTML()` and `editorRef.current.resetEditor()` functions.
 - `pasteHTML`: Occurs right before passing a paste operation's content to the [pasteFn prop](/components/rich-text-editor.md#props).  Note that the returned html string from the `pasteFn` function is immediately inserted into the DOM without further sanitization.
 - `insertContentEditableFalseHTML`: Occurs right before inserting content into the DOM using the `useContentEditableFalse` hook's `insertContentEditableFalseElement` function.
 - `getHTML`: Occurs post serialization, right before returning content through the `save()` or `editorRef.current.getHTML()` functions.
 - `initialSetLastSavedHTML`: Occurs right before initially setting the RichTextEditor's internal lastSavedHTML state variable.
+
+Bandicoot expects your `sanitizeHTML` function to return the sanitized html string.
 
 ### Example
 ```js

@@ -23,4 +23,4 @@ customized with [`richTextContext.addSerializer()`](/context/rich-text-context.m
 to RichTextEditor's `save()` prop.
 
 ### Deserialization
-Bandicoot accomplishes deserialization via React's [dangerouslySetInnerHTML](https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml). For this reason, it is HIGHLY RECOMMENDED that you review the [sanitization docs](/concepts/sanitization.md) to learn more about what you can do.
+Bandicoot accomplishes deserialization via React's [dangerouslySetInnerHTML](https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml). For this reason, it is **HIGHLY RECOMMENDED** that you review the [sanitization docs](/concepts/sanitization.md) to learn more about what you need to do to avoid security vulnerabilities.
