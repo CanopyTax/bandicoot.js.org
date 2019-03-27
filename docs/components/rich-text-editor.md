@@ -47,6 +47,7 @@ function MyEditor() {
         save={save}
         unchangedInterval={3000}
         className="my-editor"
+        sanitizeHTML={props.myOwnSanitizationFunction}
       />
     </RichTextContainer>
   )
@@ -86,7 +87,7 @@ function MyEditor() {
 - `pasteFn` (optional): A function that will be called whenever the user pastes to the editor. The function will be called with a string of text and
     returns a string that will be pasted. If you wish to prevent a paste entirely, return `false` from the pasteFn. Note that pasted HTMl is vulnerable
     to cross site scripting. See [pasting docs](/concepts/pasting.md) for more details.
-- `sanitizeHTML` (optional but HIGHLY RECOMMENDED): A function that will be called with an HTML string as a parameter just prior to that HTML being inserted into the DOM. This happens whether the HTML was provided in initialHTML or is a result of a paste event. Remember, Bandicoot relies on the consumer to prevent XSS.
+- `sanitizeHTML` (optional but **HIGHLY RECOMMENDED**): A function that will be called before Bandicoot inserts a received html string into the DOM or before Bandicoot sends the DOM content out as an html string after serialization. If no function is provided, Bandicoot will simply pass along an *unsanitized* html string. See [sanitization docs](/concepts/sanitization.md) for more information.
 
 ### Ref
 In addition to passing props, you can control the RichTextEditor imperatively with a [React ref](https://reactjs.org/docs/glossary.html#refs).
