@@ -24,7 +24,7 @@ If a sanitization function is provided through the `sanitizeHTML` prop, Bandicoo
 
 Ultimately, the choice on what sanitization process to take or what library to use is up to you. If you are looking to do client-side sanitization, there are many [third-party HTML sanitizers](https://www.npmjs.com/search?q=html+sanitizer) that already exist.
 
-### The `sanitizeHTML` Function 
+### The `sanitizeHTML` function 
 When Bandicoot calls the `sanitizeHTML` function it passes two arguments:
 1. `suspectHTML`: An string of HTML content that potentially needs sanitizing.
 2. `actionType`: A string indicating what action Bandicoot is about to take.
