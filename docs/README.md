@@ -1,6 +1,6 @@
 # Bandicoot
 Bandicoot is an npm library for doing rich text with React. It uses [React hooks](https://reactjs.org/docs/hooks-intro.html), is
-only 3.8kb gzipped (12kb ungzipped), and will keep you focused on writing your react components instead of grappling with your rich text editor.
+only 3.8kb gzipped (14kb ungzipped), and will keep you focused on writing your react components instead of grappling with your rich text editor.
 
 [Bandicoot Github page](https://github.com/CanopyTax/bandicoot)
 
@@ -23,7 +23,7 @@ Here's a very incomplete comparison:
 
 |           | Library Size (not gzipped)                  | License / Price | Inline images | Links           | "Atomic blocks" | Built-in markdown support
 |-----------|---------------------------------------------|-----------------|---------------|-----------------|-------------------|--------------------------
-| Bandicoot | [12kb](https://unpkg.com/bandicoot/dist)    | MIT (free)      | &#10004;      | &#10004;        | &#10004;          | &#10008;
+| Bandicoot | [14kb](https://unpkg.com/bandicoot/dist/)    | MIT (free)      | &#10004;      | &#10004;        | &#10004;          | &#10008;
 | Quill     | [215kb](https://unpkg.com/quill/dist/)      | MIT (free)      | &#10004;      | &#10004;        | &#10008;          | &#10004;
 | Slate     | [171kb](https://unpkg.com/slate/dist/)      | BSD-3 (free)    | &#10004;      | &#10004;        | &#10004;          | &#10004;
 | TinyMCE   | [353kb](https://unpkg.com/tinymce/)         | GPL 2.1 ([pay for plugins, support, storage, and no product attribution](https://www.tiny.cloud/pricing/))| &#10004;      | &#10004;        | &#10004;        | &#10004;
