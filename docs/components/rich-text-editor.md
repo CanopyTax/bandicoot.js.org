@@ -82,6 +82,7 @@ function MyEditor() {
     the editor's value hasn't been saved and hasn't changed for `unchangedInterval` milliseconds, the `save()` function will be called.
     Defaults to `null`, which means that the `save()` function will only be called on blur.
 - `className` (optional): A string className that will be applied to the [content editable](/concepts/content-editable.md) element.
+- `style` (optional): An object of css styles to apply to the [content editable](/concepts/content-editable.md) element.
 - `placeholder` (optional): A string placeholder that will be shown when the rich text editor is empty.
 - `placeholderColor` (optional): A string css color for the placeholderText. Defaults to `#CFCFCF`.
 - `pasteFn` (optional): A function that will be called whenever the user pastes to the editor. The function will be called with a string of text and
