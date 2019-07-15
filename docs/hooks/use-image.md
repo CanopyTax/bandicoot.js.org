@@ -27,7 +27,7 @@ function Image() {
 import {useImage} from 'bandicoot'
 
 function RemovableImage() {
-  const {chooseFile, removeImage} = useImage({processImgElement, fileBlobToUrl})
+  const {chooseFile, removeImage} = useImage({processImgElement, fileBlobToUrl, acceptImgTypes: '.png'})
 
   return (
     <button onClick={chooseFile}>
@@ -61,7 +61,7 @@ function RemovableImage() {
 
 ## API
 ```js
-const {chooseFile, removeImage} = useImage({processImgElement, fileBlobToUrl})
+const {chooseFile, removeImage} = useImage({processImgElement, fileBlobToUrl, acceptImgTypes})
 ```
 
 ### Arguments
@@ -74,6 +74,7 @@ const {chooseFile, removeImage} = useImage({processImgElement, fileBlobToUrl})
   editor. The `fileBlobToUrl` function will be called with one argument, a [`File`](https://developer.mozilla.org/en-US/docs/Web/API/File).
   The return value of `fileBlobToUrl` must be a promise that resolves with a string url for that FileBlog object. This is useful for uploading a
   file to a server before inserting it into the DOM. Defaults to calling [`URL.createObjectURL(file)`](https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL).
+- `acceptImgTypes` (optional): A comma delimited string that configures what file types will be accepted by the file input.  Default is `'.jpg, .png, image/*'`.
 
 ## Return value
 `useImage` returns an object with the following properties:
