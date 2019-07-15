@@ -556,7 +556,7 @@ Which is where the <code>useImage</code> hook helps out.</p>
 <pre><code class="lang-jsx"><span class="hljs-keyword">import</span> {useImage} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;bandicoot&apos;</span>
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">RemovableImage</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">const</span> {chooseFile, removeImage} = useImage({processImgElement, fileBlobToUrl})
+  <span class="hljs-keyword">const</span> {chooseFile, removeImage} = useImage({processImgElement, fileBlobToUrl, acceptImgTypes: <span class="hljs-string">&apos;.png&apos;</span>})
 
   <span class="hljs-keyword">return</span> (
     <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{chooseFile}</span>&gt;</span>
@@ -588,7 +588,7 @@ Which is where the <code>useImage</code> hook helps out.</p>
 }
 </code></pre>
 <h2 id="api">API</h2>
-<pre><code class="lang-js"><span class="hljs-keyword">const</span> {chooseFile, removeImage} = useImage({processImgElement, fileBlobToUrl})
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> {chooseFile, removeImage} = useImage({processImgElement, fileBlobToUrl, acceptImgTypes})
 </code></pre>
 <h3 id="arguments">Arguments</h3>
 <p><code>useImage</code> can be called with no arguments (to use the defaults) or with a single object argument with the following properties:</p>
@@ -600,6 +600,7 @@ every img element that is inserted via <code>useImage()</code>. Defaults to a no
 editor. The <code>fileBlobToUrl</code> function will be called with one argument, a <a href="https://developer.mozilla.org/en-US/docs/Web/API/File" target="_blank"><code>File</code></a>.
 The return value of <code>fileBlobToUrl</code> must be a promise that resolves with a string url for that FileBlog object. This is useful for uploading a
 file to a server before inserting it into the DOM. Defaults to calling <a href="https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL" target="_blank"><code>URL.createObjectURL(file)</code></a>.</li>
+<li><code>acceptImgTypes</code> (optional): A comma delimited string that configures what file types the file input should accept. Default is <code>&apos;.jpg, .png, image/*&apos;</code>.</li>
 </ul>
 <h2 id="return-value">Return value</h2>
 <p><code>useImage</code> returns an object with the following properties:</p>
@@ -656,7 +657,7 @@ one argument, the <code>&lt;img&gt;</code> dom element that you wish to remove.<
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Inserting images","level":"2.5","depth":1,"next":{"title":"Inserting links","level":"2.6","depth":1,"path":"hooks/use-link.md","ref":"hooks/use-link.md","articles":[]},"previous":{"title":"H1, H2, H3","level":"2.4","depth":1,"path":"walkthrough/headers.md","ref":"walkthrough/headers.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","github","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/CanopyTax/bandicoot"},"ga":{"configuration":"auto","token":"UA-133316058-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"hooks/use-image.md","mtime":"2019-07-02T15:51:22.147Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-02T15:52:09.378Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Inserting images","level":"2.5","depth":1,"next":{"title":"Inserting links","level":"2.6","depth":1,"path":"hooks/use-link.md","ref":"hooks/use-link.md","articles":[]},"previous":{"title":"H1, H2, H3","level":"2.4","depth":1,"path":"walkthrough/headers.md","ref":"walkthrough/headers.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","github","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/CanopyTax/bandicoot"},"ga":{"configuration":"auto","token":"UA-133316058-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"hooks/use-image.md","mtime":"2019-07-15T20:39:25.803Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-15T20:40:17.220Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
