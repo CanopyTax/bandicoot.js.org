@@ -74,6 +74,7 @@ const {chooseFile, removeImage} = useImage({processImgElement, fileBlobToUrl, ac
   editor. The `fileBlobToUrl` function will be called with one argument, a [`File`](https://developer.mozilla.org/en-US/docs/Web/API/File).
   The return value of `fileBlobToUrl` must be a promise that resolves with a string url for that FileBlog object. This is useful for uploading a
   file to a server before inserting it into the DOM. Defaults to calling [`URL.createObjectURL(file)`](https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL).
+  If not provided, bandicoot will use [data urls](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) for storing images.
 - `acceptImgTypes` (optional): A comma delimited string that configures what file types the file input should accept. Default is `'.jpg, .png, image/*'`.
 
 ## Return value
