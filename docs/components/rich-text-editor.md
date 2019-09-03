@@ -75,6 +75,7 @@ function MyEditor() {
 ## API
 
 ### Props
+- `disabled` (optional): A bool that will disable the rich text editor if true
 - `initialHTML` (optional): A string of html that will be the editor's initial value. Defaults to empty string.
 - `save` (optional): A function that will be called whenever the editor blurs or no changes are made for an `unchangedInterval`.
   The `save` function will be called with one argument, `html`, that is a serialized html string. Defaults to no-op.
