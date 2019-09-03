@@ -1,6 +1,6 @@
 # H1 with formatBlock
 
-NOTE: It is not recommended to use h1/h2/h3 features given [the different browsers' inability to properly handle headers inside of (un)ordered lists](https://github.com/CanopyTax/bandicoot/issues/53). Until at least Chrome can correctly [toggle header blocks in lists](https://stackoverflow.com/questions/57468855/how-can-i-toggle-contenteditable-h1-inside-of-ordered-lists-in-chrome) there is little we can do. [Manual DOM manipulation](https://github.com/CanopyTax/bandicoot/pull/54) proves unsuccessful.
+NOTE: It is not recommended to attempt h1/h2/h3 tags given [the different browsers' inability to properly handle headers inside of (un)ordered lists](https://github.com/CanopyTax/bandicoot/issues/53). Until at least Chrome can correctly [toggle header blocks in lists](https://stackoverflow.com/questions/57468855/how-can-i-toggle-contenteditable-h1-inside-of-ordered-lists-in-chrome) there is little we can do. [Manual DOM manipulation](https://github.com/CanopyTax/bandicoot/pull/54) proves unsuccessful.
 
 Let's add a [control button](/concepts/control-button.md) for adding a block-level element around the line containing the current selection:
 ```jsx
