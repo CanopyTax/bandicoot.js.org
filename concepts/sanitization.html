@@ -547,7 +547,7 @@ that javascript will be executed during deserialization. This is a security risk
 <h3 id="sanitization">Sanitization</h3>
 <p>Since Bandicoot does <strong>NOT</strong> automatically sanitize incoming or outgoing HTML, it is up to you as the developer to make sure that sanitization happens. However, Bandicoot does expose a <a href="../components/rich-text-editor.html#props">sanitizeHTML prop</a> on the <a href="../components/rich-text-editor.html">RichTextEditor component</a> which allows you to provide a sanitization function.</p>
 <p>If a sanitization function is provided through the <code>sanitizeHTML</code> prop, Bandicoot will pass incoming HTML strings through this function before inserting the content into the DOM (see <a href="sanitization.html#notes">note 1</a>). If provided, Bandicoot will also pass outgoing HTML through the <code>sanitizeHTML</code> function after serialization (see <a href="sanitization.html#notes">note 2</a>). If a <code>sanitizeHTML</code> function is <em>NOT</em> provided, Bandicoot will simply pass through the <em>unsanitized</em> HTML string. In the case of inserting the content into the DOM this would mean using <code>dangerouslySetInnerHTML</code> with unsanitized HTML - <strong>NOT RECOMMENDED</strong>!</p>
-<p>Ultimately, the choice on what sanitization process to take or what library to use is up to you. If you are looking to do client-side sanitization, there are many <a href="https://www.npmjs.com/search?q=html+sanitizer" target="_blank">third-party HTML sanitizers</a> that already exist.</p>
+<p>Ultimately, the choice on what sanitization process to take or what library to use is up to you. If you are looking to do client-side sanitization, there are many <a href="https://www.npmjs.com/search?q=html+sanitizer" target="_blank">third-party HTML sanitizers</a> that already exist. One that works well is <a href="https://github.com/apostrophecms/sanitize-html#readme" target="_blank">sanitize-html</a>.</p>
 <h3 id="the-sanitizehtml-function">The <code>sanitizeHTML</code> function</h3>
 <p>When Bandicoot calls the <code>sanitizeHTML</code> function it passes two arguments:</p>
 <ol>
@@ -564,14 +564,13 @@ that javascript will be executed during deserialization. This is a security risk
 </ul>
 <p>Bandicoot expects your <code>sanitizeHTML</code> function to return the sanitized HTML string.</p>
 <h3 id="example">Example</h3>
-<pre><code class="lang-js"><span class="hljs-keyword">import</span> {RichTextEditor, RichTextContainer} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;bandicoot&apos;</span>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> sanitizeHTML <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;sanitize-html&apos;</span>
+<span class="hljs-keyword">import</span> {RichTextEditor, RichTextContainer} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;bandicoot&apos;</span>
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyEditor</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">return</span> (
     <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RichTextContainer</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">RichTextEditor</span>
-        <span class="hljs-attr">sanitizeHTML</span>=<span class="hljs-string">{myOwnSanitizeHtmlFunction}</span>
-      /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">RichTextEditor</span> <span class="hljs-attr">sanitizeHTML</span>=<span class="hljs-string">{sanitizeHTML}</span> /&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">RichTextContainer</span>&gt;</span>
   )
 }
@@ -626,7 +625,7 @@ function myOwnSanitizeHtmlFunction(suspectHTML, actionType) {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Sanitization","level":"6.9","depth":1,"previous":{"title":"Serialization","level":"6.8","depth":1,"path":"concepts/serialization.md","ref":"concepts/serialization.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","github","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/CanopyTax/bandicoot"},"ga":{"configuration":"auto","token":"UA-133316058-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"concepts/sanitization.md","mtime":"2019-09-03T22:44:03.432Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-03T22:44:57.650Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Sanitization","level":"6.9","depth":1,"previous":{"title":"Serialization","level":"6.8","depth":1,"path":"concepts/serialization.md","ref":"concepts/serialization.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","github","ga"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/CanopyTax/bandicoot"},"ga":{"configuration":"auto","token":"UA-133316058-1"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"concepts/sanitization.md","mtime":"2019-09-17T17:36:38.470Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-17T17:37:19.266Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
