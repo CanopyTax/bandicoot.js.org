@@ -2,13 +2,14 @@
 
 Let's add a [control button](/concepts/control-button.md) for bolding the rich text:
 ```jsx
+import sanitizeHTML from 'sanitize-html'
 import {RichTextContainer, RichTextEditor, useDocumentExecCommand, useDocumentQueryCommandState} from 'bandicoot'
 
 function MyComponent() {
   return (
     <RichTextContainer>
       <Bold />
-      <RichTextEditor />
+      <RichTextEditor sanitizeHTML={sanitizeHTML} />
     </RichTextContainer>
   )
 }

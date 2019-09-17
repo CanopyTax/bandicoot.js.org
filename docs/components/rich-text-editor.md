@@ -14,12 +14,13 @@ consumed by RichTextEditor.
 
 ## Basic Example
 ```jsx
+import sanitizeHTML from 'sanitize-html'
 import {RichTextEditor, RichTextContainer} from 'bandicoot'
 
 function MyEditor() {
   return (
     <RichTextContainer>
-      <RichTextEditor />
+      <RichTextEditor sanitizeHTML={sanitizeHTML} />
     </RichTextContainer>
   )
 }
@@ -27,6 +28,7 @@ function MyEditor() {
 
 ### Advanced Example
 ```jsx
+import sanitizeHTML from 'sanitize-html'
 import {useRef} from 'react'
 import {RichTextEditor, RichTextContainer} from 'bandicoot'
 
@@ -47,7 +49,7 @@ function MyEditor() {
         save={save}
         unchangedInterval={3000}
         className="my-editor"
-        sanitizeHTML={props.myOwnSanitizationFunction}
+        sanitizeHTML={sanitizeHTML}
       />
     </RichTextContainer>
   )

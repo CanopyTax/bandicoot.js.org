@@ -12,12 +12,13 @@ yarn add bandicoot
 The bandicoot library exports two components, both of which must be rendered for rich text editing.
 
 ```jsx
+import sanitizeHTML from 'sanitize-html'
 import {RichTextContainer, RichTextEditor} from 'bandicoot'
 
 function MyComponent() {
   return (
     <RichTextContainer>
-      <RichTextEditor />
+      <RichTextEditor sanitizeHTML={sanitizeHTML} />
     </RichTextContainer>
   )
 }

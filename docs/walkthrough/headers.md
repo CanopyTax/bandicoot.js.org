@@ -4,13 +4,14 @@ NOTE: It is not recommended to attempt h1/h2/h3 tags given [the different browse
 
 Let's add a [control button](/concepts/control-button.md) for adding a block-level element around the line containing the current selection:
 ```jsx
+import sanitizeHTML from 'sanitize-html'
 import {RichTextContainer, RichTextEditor, useDocumentExecCommand, useFormatBlock} from 'bandicoot'
 
 function MyComponent() {
   return (
     <RichTextContainer>
       <HeaderButton value='h1'/>
-      <RichTextEditor />
+      <RichTextEditor sanitizeHTML={sanitizeHTML} />
     </RichTextContainer>
   )
 }
