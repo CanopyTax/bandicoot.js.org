@@ -14,12 +14,13 @@ consumed by RichTextEditor.
 
 ## Basic Example
 ```jsx
+import sanitizeHTML from 'sanitize-html'
 import {RichTextEditor, RichTextContainer} from 'bandicoot'
 
 function MyEditor() {
   return (
     <RichTextContainer>
-      <RichTextEditor />
+      <RichTextEditor sanitizeHTML={sanitizeHTML} />
     </RichTextContainer>
   )
 }
@@ -27,6 +28,7 @@ function MyEditor() {
 
 ### Advanced Example
 ```jsx
+import sanitizeHTML from 'sanitize-html'
 import {useRef} from 'react'
 import {RichTextEditor, RichTextContainer} from 'bandicoot'
 
@@ -47,7 +49,7 @@ function MyEditor() {
         save={save}
         unchangedInterval={3000}
         className="my-editor"
-        sanitizeHTML={props.myOwnSanitizationFunction}
+        sanitizeHTML={sanitizeHTML}
       />
     </RichTextContainer>
   )
@@ -75,6 +77,7 @@ function MyEditor() {
 ## API
 
 ### Props
+- `sanitizeHTML` (required): A function that will be called before Bandicoot inserts a received html string into the DOM or before Bandicoot sends the DOM content out as an html string after serialization. If no function is provided, Bandicoot throws an error. See [sanitization docs](/concepts/sanitization.md) for more information.
 - `disabled` (optional): A bool that will disable the rich text editor if true
 - `initialHTML` (optional): A string of html that will be the editor's initial value. Defaults to empty string.
 - `save` (optional): A function that will be called whenever the editor blurs or no changes are made for an `unchangedInterval`.
@@ -89,7 +92,6 @@ function MyEditor() {
 - `pasteFn` (optional): A function that will be called whenever the user pastes to the editor. The function will be called with a string of text and
     returns a string that will be pasted. If you wish to prevent a paste entirely, return `false` from the pasteFn. Note that pasted HTMl is vulnerable
     to cross site scripting. See [pasting docs](/concepts/pasting.md) for more details.
-- `sanitizeHTML` (optional but **HIGHLY RECOMMENDED**): A function that will be called before Bandicoot inserts a received html string into the DOM or before Bandicoot sends the DOM content out as an html string after serialization. If no function is provided, Bandicoot will simply pass along an *unsanitized* html string. See [sanitization docs](/concepts/sanitization.md) for more information.
 
 ### Ref
 In addition to passing props, you can control the RichTextEditor imperatively with a [React ref](https://reactjs.org/docs/glossary.html#refs).

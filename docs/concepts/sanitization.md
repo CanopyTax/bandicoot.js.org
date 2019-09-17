@@ -22,7 +22,7 @@ Since Bandicoot does **NOT** automatically sanitize incoming or outgoing HTML, i
 
 If a sanitization function is provided through the `sanitizeHTML` prop, Bandicoot will pass incoming HTML strings through this function before inserting the content into the DOM (see [note 1](/concepts/sanitization.md#notes)). If provided, Bandicoot will also pass outgoing HTML through the `sanitizeHTML` function after serialization (see [note 2](/concepts/sanitization.md#notes)). If a `sanitizeHTML` function is *NOT* provided, Bandicoot will simply pass through the *unsanitized* HTML string. In the case of inserting the content into the DOM this would mean using `dangerouslySetInnerHTML` with unsanitized HTML - **NOT RECOMMENDED**!
 
-Ultimately, the choice on what sanitization process to take or what library to use is up to you. If you are looking to do client-side sanitization, there are many [third-party HTML sanitizers](https://www.npmjs.com/search?q=html+sanitizer) that already exist.
+Ultimately, the choice on what sanitization process to take or what library to use is up to you. If you are looking to do client-side sanitization, there are many [third-party HTML sanitizers](https://www.npmjs.com/search?q=html+sanitizer) that already exist. One that works well is [sanitize-html](https://github.com/apostrophecms/sanitize-html#readme).
 
 ### The `sanitizeHTML` function 
 When Bandicoot calls the `sanitizeHTML` function it passes two arguments:
@@ -40,14 +40,13 @@ Bandicoot expects your `sanitizeHTML` function to return the sanitized HTML stri
 
 ### Example
 ```js
+import sanitizeHTML from 'sanitize-html'
 import {RichTextEditor, RichTextContainer} from 'bandicoot'
 
 function MyEditor() {
   return (
     <RichTextContainer>
-      <RichTextEditor
-        sanitizeHTML={myOwnSanitizeHtmlFunction}
-      />
+      <RichTextEditor sanitizeHTML={sanitizeHTML} />
     </RichTextContainer>
   )
 }

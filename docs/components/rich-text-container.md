@@ -9,12 +9,13 @@ bandicoot to work properly.
 
 ## Basic Example
 ```jsx
+import sanitizeHTML from 'sanitize-html'
 import {RichTextContainer, RichTextEditor} from 'bandicoot'
 
 function MyEditor() {
   return (
     <RichTextContainer>
-      <RichTextEditor />
+      <RichTextEditor sanitizeHTML={sanitizeHTML} />
     </RichTextContainer>
   )
 }
