@@ -92,6 +92,7 @@ function MyEditor() {
 - `pasteFn` (optional): A function that will be called whenever the user pastes to the editor. The function will be called with a string of text and
     returns a string that will be pasted. If you wish to prevent a paste entirely, return `false` from the pasteFn. Note that pasted HTMl is vulnerable
     to cross site scripting. See [pasting docs](/concepts/pasting.md) for more details.
+- `autoFocus` (optional): A bool that if true will trigger focus on contentEditable after mount.
 
 ### Ref
 In addition to passing props, you can control the RichTextEditor imperatively with a [React ref](https://reactjs.org/docs/glossary.html#refs).
