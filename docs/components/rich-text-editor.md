@@ -88,7 +88,7 @@ function MyEditor() {
 - `className` (optional): A string className that will be applied to the [content editable](/concepts/content-editable.md) element.
 - `style` (optional): An object of css styles to apply to the [content editable](/concepts/content-editable.md) element.
 - `placeholder` (optional): A string placeholder that will be shown when the rich text editor is empty.
-- `placeholderColor` (optional): A string css color for the placeholderText. Defaults to `#CFCFCF`.
+- `placeholderStyle` (optional): An object of styles for the placeholder text. Placeholder style defaults to Chrome: `color: rgb(117, 117, 117)` and Firefox: `opacity: .5`.
 - `pasteFn` (optional): A function that will be called whenever the user pastes to the editor. The function will be called with a string of text and
     returns a string that will be pasted. If you wish to prevent a paste entirely, return `false` from the pasteFn. Note that pasted HTMl is vulnerable
     to cross site scripting. See [pasting docs](/concepts/pasting.md) for more details.
