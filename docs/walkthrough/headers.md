@@ -17,7 +17,7 @@ function MyComponent() {
 }
 
 function HeaderButton(props) {
-  const value = {props};
+  const {value} = props;
   const {formatBlock} = useFormatBlock()
   const {isActive} = useDocumentQueryCommandState('formatBlock', value)
 
