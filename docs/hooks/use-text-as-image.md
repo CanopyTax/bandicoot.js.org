@@ -81,7 +81,11 @@ const {insertTextAsImage} = useTextAsImage({processSerializedElement, fontFamily
 - `processSerializedElement`: A function that will be called with each text-as-image dom element in the rich text editor. This can be used
   to set up click listeners, change the style, etc. The function will be called for the initialHTML, calls to setHTML, and also for
   every text-as-image element that is inserted via `useTextAsImage()`. Defaults to a no-op function.
-- `fontFamily` (optional): A string declaring the desired font for the text
+- `fontFamily` (optional): A string declaring the desired font for the text.
+- `fontWeight` (optional): The font weight for the text. Defaults to `bold`.
+- `fillStyle` (optional): The [fillStyle](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle) applied to the text. This can be used to change the font color. Defaults to `#00bf4b`.
+- `textBottom` (optional): The `y` position passed to [fillText()](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillText). Note that the `textBaseline` within bandicoot is set to `bottom`.
+- `backgroundColor` (optional): The background color of the image. Defaults to `transparent`.
 
 ### Return value
 `useTextAsImage` returns an object with the following properties:
